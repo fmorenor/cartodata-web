@@ -1,0 +1,60 @@
+/* site.css — Design system compartido de CartoData
+   Todas las páginas estáticas deben cargarlo (shared.js lo inyecta automáticamente).
+   Mantener en sync con el React bundle (assets/index-*.css). */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+/* ── Tokens de diseño — modo oscuro (default) ── */
+:root {
+  --blue:        #3b5bdb;
+  --blue-dark:   #1e40af;
+  --blue-light:  #7b9cff;
+  --bg:          #050816;
+  --bg2:         #0b1226;
+  --surface:     rgba(255,255,255,0.04);
+  --text:        #f8fafc;
+  --muted:       rgba(248,250,252,0.55);
+  --border:      rgba(255,255,255,0.08);
+
+  --font-sans:    'DM Sans', 'Inter', system-ui, sans-serif;
+  --font-heading: 'Helvetica Neue', 'Neue Haas Grotesk', 'Arial', sans-serif;
+}
+
+/* ── Modo claro ── */
+:root:not(.dark) {
+  --bg:      #f8fafc;
+  --bg2:     #f1f5f9;
+  --surface: rgba(0,0,0,0.03);
+  --text:    #0f172a;
+  --muted:   rgba(15,23,42,0.55);
+  --border:  rgba(0,0,0,0.08);
+}
+
+/* ── Reset mínimo ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Base ── */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* ── Headings — valores exactos del bundle React ── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--text);
+}
+h1 { font-weight: 100; letter-spacing: -0.02em;  line-height: 1.05; }
+h2 { font-weight: 100; letter-spacing: -0.015em; line-height: 1.1;  }
+h3 { font-weight: 300; letter-spacing: -0.01em;  line-height: 1.15; }
+
+a { color: inherit; }
+
+img, video { display: block; max-width: 100%; }

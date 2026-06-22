@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Historia — CartoData</title>
+  <meta name="description" content="Cuatro generaciones dedicadas a hacer mapas. Conoce la historia de CartoData desde 1930." />
+  <!-- site.css y fuentes las inyecta shared.js automáticamente -->
+  <style>
+    :root {
+      --glass: rgba(255,255,255,0.05);
+    }
+
+    html { color-scheme: dark; }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Nav y Footer manejados por shared.js */
+
+    /* HERO */
+    .hero {
+      position: relative; width: 100%; padding-top: 64px;
+      min-height: 92vh; display: flex; align-items: flex-end;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('./legacy.jpg');
+      background-size: cover; background-position: center 30%;
+    }
+    .hero-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background:
+        linear-gradient(to top, rgba(5,8,22,1) 0%, rgba(5,8,22,0.55) 50%, rgba(5,8,22,0.12) 100%),
+        linear-gradient(to right, rgba(5,8,22,0.65) 0%, transparent 65%);
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      padding: clamp(3rem,8vw,6rem) clamp(1.5rem,5vw,4rem);
+      max-width: 820px;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--blue-light);
+      margin-bottom: 1.2rem;
+    }
+    .eyebrow::before {
+      content: ''; display: block;
+      width: 28px; height: 1.5px; background: var(--blue-light);
+    }
+    /* h1, h2 — font-family, weight y letter-spacing vienen de site.css */
+    .hero h1 {
+      font-size: clamp(2.8rem,6vw,5.5rem);
+      line-height: 1.04;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 em {
+      font-style: normal; font-weight: 700;
+      background: linear-gradient(135deg, #fff 30%, var(--blue-light));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: clamp(1rem,1.8vw,1.15rem); color: var(--muted);
+      max-width: 520px; line-height: 1.75; margin-bottom: 2.5rem;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 26px; border-radius: 999px;
+      background: var(--blue); color: #fff;
+      text-decoration: none; font-size: 0.9rem; font-weight: 500;
+      transition: opacity 200ms;
+    }
+    .btn-primary:hover { opacity: 0.88; }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 26px; border-radius: 999px;
+      border: 1px solid var(--border); background: rgba(255,255,255,0.06);
+      color: var(--text); text-decoration: none; font-size: 0.9rem;
+      backdrop-filter: blur(8px); transition: border-color 200ms;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.25); }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    /* STATS */
+    .stats-bar {
+      background: rgba(255,255,255,0.03);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .stats-inner {
+      max-width: 1100px; margin: 0 auto;
+      padding: 0 clamp(1.5rem,5vw,4rem);
+      display: grid; grid-template-columns: repeat(4,1fr);
+    }
+    .stat-item {
+      padding: 2rem 1.5rem; border-right: 1px solid var(--border);
+      text-align: center;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-size: clamp(2rem,4vw,2.8rem); font-weight: 700; line-height: 1; }
+    .stat-num span { color: var(--blue-light); }
+    .stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 0.4rem; line-height: 1.4; }
+    @media (max-width: 640px) {
+      .stats-inner { grid-template-columns: repeat(2,1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+    }
+
+    /* MAIN LAYOUT */
+    .main-wrap {
+      max-width: 1100px; margin: 0 auto;
+      padding: clamp(4rem,8vw,7rem) clamp(1.5rem,5vw,4rem);
+      display: grid; grid-template-columns: 380px 1fr;
+      gap: 6rem; align-items: start;
+    }
+    .sticky-col { position: sticky; top: 88px; }
+    .section-eyebrow {
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--blue-light);
+      margin-bottom: 1rem; display: block;
+    }
+    .section-title {
+      font-size: clamp(1.6rem,3vw,2.4rem);
+      line-height: 1.15; color: var(--text);
+      margin-bottom: 1.2rem;
+    }
+    .section-title strong { font-weight: 600; }
+    .section-body {
+      font-size: 0.95rem; color: var(--muted);
+      line-height: 1.8; margin-bottom: 1rem;
+    }
+
+    /* MINI STATS */
+    .mini-stats {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin-top: 2rem;
+    }
+    .mini-stat {
+      background: var(--glass); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.1rem;
+    }
+    .mini-stat-num { font-size: 1.7rem; font-weight: 700; line-height: 1; }
+    .mini-stat-num span { color: var(--blue-light); }
+    .mini-stat-label { font-size: 0.72rem; color: var(--muted); margin-top: 0.3rem; line-height: 1.4; }
+
+    /* TIMELINE */
+    .timeline { display: flex; flex-direction: column; }
+    .tl-item {
+      display: grid; grid-template-columns: 56px 20px 1fr;
+      gap: 0 0.75rem; position: relative; padding-bottom: 3rem;
+      align-items: start;
+    }
+    .tl-item::before {
+      content: ''; position: absolute;
+      left: 84px; top: 22px; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, rgba(59,91,219,0.4), rgba(255,255,255,0.06));
+    }
+    .tl-item:last-child::before { display: none; }
+    .tl-year {
+      font-size: 0.7rem; font-weight: 700; color: var(--blue-light);
+      letter-spacing: 0.08em; padding-top: 0.15rem; text-align: right;
+      white-space: nowrap;
+    }
+    .tl-dot {
+      width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0;
+      background: var(--blue); border: 2px solid var(--bg);
+      box-shadow: 0 0 0 4px rgba(59,91,219,0.2);
+      margin-top: 0; align-self: start;
+      transition: transform 300ms, box-shadow 300ms;
+    }
+    .tl-item:hover .tl-dot {
+      transform: scale(1.25);
+      box-shadow: 0 0 0 6px rgba(59,91,219,0.25);
+    }
+    .tl-body { padding-left: 0.25rem; }
+    .tl-tag {
+      display: inline-block; font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--blue-light); margin-bottom: 0.4rem;
+    }
+    .tl-title {
+      font-size: 1.05rem; font-weight: 600; color: var(--text);
+      margin-bottom: 0.6rem; line-height: 1.3;
+    }
+    .tl-desc {
+      font-size: 0.85rem; color: var(--muted); line-height: 1.7;
+    }
+    .tl-highlight {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 0.8rem; padding: 0.4rem 0.9rem; border-radius: 999px;
+      background: rgba(59,91,219,0.15); border: 1px solid rgba(59,91,219,0.3);
+      font-size: 0.75rem; color: var(--blue-light);
+    }
+
+    /* VALUES */
+    .values-section {
+      background: linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
+      border-top: 1px solid var(--border);
+    }
+    .values-wrap {
+      max-width: 1100px; margin: 0 auto;
+      padding: clamp(4rem,8vw,6rem) clamp(1.5rem,5vw,4rem);
+    }
+    .values-grid {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      gap: 1.25rem; margin-top: 3rem;
+    }
+    .val-card {
+      background: var(--glass); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.8rem 1.4rem;
+      transition: border-color 300ms, transform 300ms;
+    }
+    .val-card:hover { border-color: rgba(59,91,219,0.45); transform: translateY(-4px); }
+    .val-icon {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+      color: var(--blue-light); margin-bottom: 0.9rem; display: block;
+    }
+    .val-name { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.45rem; }
+    .val-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
+    @media (max-width: 780px) { .values-grid { grid-template-columns: repeat(2,1fr); } }
+
+    /* CTA BAND */
+    .cta-band {
+      position: relative; overflow: hidden; margin: 0 clamp(1.5rem,5vw,4rem) 5rem;
+      border-radius: 24px;
+    }
+    .cta-band-bg {
+      position: absolute; inset: 0;
+      background-image: url('./equipo.avif');
+      background-size: cover; background-position: center 25%;
+    }
+    .cta-band-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg,
+        rgba(5,8,22,0.93) 0%, rgba(30,64,175,0.5) 55%, rgba(5,8,22,0.75) 100%);
+    }
+    .cta-inner {
+      position: relative; z-index: 1;
+      padding: clamp(3rem,6vw,5rem) clamp(2rem,5vw,4rem);
+      max-width: 660px;
+    }
+    .cta-inner .section-title { margin-bottom: 0.9rem; }
+    .cta-inner .section-body { margin-bottom: 2rem; }
+
+
+    @media (max-width: 860px) {
+      .main-wrap { grid-template-columns: 1fr; gap: 3rem; }
+      .sticky-col { position: static; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p class="eyebrow">Somos tradición</p>
+      <h1>4 generaciones<br>dedicadas a<br><em>hacer mapas.</em></h1>
+      <p class="hero-sub">
+        Más de 90 años dando contexto geográfico a las decisiones más importantes
+        de México y el mundo. Innovación sin perder la raíz.
+      </p>
+      <div class="hero-actions">
+        <a href="#timeline" class="btn-primary">Ver nuestra historia</a>
+        <a href="https://wa.me/523336271552" target="_blank" rel="noreferrer" class="btn-ghost">Cotizar ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+
+  <!-- TIMELINE -->
+  <div id="timeline">
+    <div class="main-wrap">
+      <!-- Sticky left -->
+      <div class="sticky-col">
+        <span class="section-eyebrow">Nuestra historia</span>
+        <h2 class="section-title">De los mapas<br>dibujados a mano<br><strong>al análisis en tiempo real.</strong></h2>
+        <p class="section-body">
+          Cada generación de la familia Audirac adoptó la tecnología de su época
+          para resolver retos territoriales complejos. Lo que cambia es la herramienta.
+          Lo que permanece es el rigor, la precisión y el compromiso con el dato real.
+        </p>
+        <div class="mini-stats">
+          <div class="mini-stat">
+            <div class="mini-stat-num">1930</div>
+            <div class="mini-stat-label">año del primer mapa familiar</div>
+          </div>
+          <div class="mini-stat">
+            <div class="mini-stat-num">1<span>er</span></div>
+            <div class="mini-stat-label">catastro aéreo en Latinoamérica</div>
+          </div>
+          <div class="mini-stat">
+            <div class="mini-stat-num">
+              <svg viewBox="0 0 40 48" width="36" height="44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- cinta -->
+                <path d="M14 0 L20 10 L26 0 Z" fill="#a0aec0" opacity="0.7"/>
+                <path d="M14 0 L20 10 L17 0 Z" fill="#718096" opacity="0.5"/>
+                <!-- círculo medalla -->
+                <circle cx="20" cy="32" r="14" fill="url(#silver-grad)" stroke="#cbd5e0" stroke-width="1.5"/>
+                <circle cx="20" cy="32" r="11" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+                <!-- estrella -->
+                <path d="M20 23 l1.8 5.5 h5.8 l-4.7 3.4 1.8 5.5 -4.7-3.4 -4.7 3.4 1.8-5.5 -4.7-3.4 h5.8 Z" fill="rgba(255,255,255,0.55)"/>
+                <defs>
+                  <radialGradient id="silver-grad" cx="35%" cy="30%" r="70%">
+                    <stop offset="0%" stop-color="#e2e8f0"/>
+                    <stop offset="50%" stop-color="#94a3b8"/>
+                    <stop offset="100%" stop-color="#64748b"/>
+                  </radialGradient>
+                </defs>
+              </svg>
+            </div>
+            <div class="mini-stat-label">medalla de plata software AU2</div>
+          </div>
+          <div class="mini-stat">
+            <div class="mini-stat-num">4<span>ª</span></div>
+            <div class="mini-stat-label">dimensión geoespacial en la nube</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Timeline -->
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-year">1930</div>
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <span class="tl-tag">Primera generación · Antonio Audirac</span>
+            <p class="tl-title">Los primeros mapas</p>
+            <p class="tl-desc">
+              Antonio Audirac levantó los primeros mapas familiares utilizando
+              mediciones de campo con cadenas. Cartografió parques nacionales
+              como el Desierto de los Leones, estableciendo la vocación geográfica
+              que definiría a la familia por más de un siglo.
+            </p>
+            <span class="tl-highlight">México · Levantamientos con cadena</span>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">1967</div>
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <span class="tl-tag">Segunda generación · Henri Audirac (1925–1995)</span>
+            <p class="tl-title">Primer levantamiento aéreo catastral de Latinoamérica</p>
+            <p class="tl-desc">
+              Henri Audirac dirigió el primer levantamiento catastral fotogramétrico
+              aéreo de toda Latinoamérica en Guadalajara, Jalisco. Creó las normas
+              catastrales que aún son referencia en México. Más tarde, como Presidente
+              del Consejo, impulsó el desarrollo de software propio.
+            </p>
+            <span class="tl-highlight">Guadalajara, Jalisco · Fotogrametría aérea</span>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">1987</div>
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <span class="tl-tag">Tercera generación · Software propio</span>
+            <p class="tl-title">Software geoespacial AU2 — Medalla de plata</p>
+            <p class="tl-desc">
+              El software AU2 ganó medalla de plata e impulsó una nueva era de
+              desarrollo tecnológico interno. CartoData dejó de depender de
+              herramientas genéricas y comenzó a crear soluciones a la medida
+              del reto geoespacial mexicano.
+            </p>
+            <span class="tl-highlight">Software AU2 · Premio internacional</span>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">2016</div>
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <span class="tl-tag">Cuarta generación · Félix Audirac</span>
+            <p class="tl-title">La cuarta dimensión: mapas en tiempo real</p>
+            <p class="tl-desc">
+              Félix Audirac asume la dirección general y lleva la plataforma a la nube.
+              Drones, inteligencia artificial, cómputo en la nube y blockchain
+              democratizan el acceso a la información geoespacial desde cualquier
+              dispositivo, en cualquier parte del mundo.
+            </p>
+            <span class="tl-highlight">Nube · IA · Drones · Blockchain</span>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">Hoy</div>
+          <div class="tl-dot" style="background:#7b9cff;box-shadow:0 0 0 4px rgba(123,156,255,0.25);"></div>
+          <div class="tl-body">
+            <span class="tl-tag">CartoData hoy</span>
+            <p class="tl-title">375+ proyectos en 16 países y 4 continentes</p>
+            <p class="tl-desc">
+              Equipos en Guadalajara, Nuevo León y El Salvador atienden proyectos
+              de ciudades, infraestructura, minería e instituciones en cuatro continentes.
+              La tradición cartográfica familiar se convierte en soluciones geoespaciales
+              de clase mundial accesibles para cualquier organización.
+            </p>
+            <span class="tl-highlight">Guadalajara · Nuevo León · El Salvador</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VALORES -->
+  <div class="values-section">
+    <div class="values-wrap">
+      <span class="section-eyebrow">Valores</span>
+      <h2 class="section-title">Lo que nos <strong>define.</strong></h2>
+      <div class="values-grid">
+        <div class="val-card">
+          <span class="val-icon">01</span>
+          <p class="val-name">Innovación</p>
+          <p class="val-desc">Adoptamos tecnología emergente antes de que sea tendencia. Drones, IA y nube al servicio del territorio.</p>
+        </div>
+        <div class="val-card">
+          <span class="val-icon">02</span>
+          <p class="val-name">Creatividad</p>
+          <p class="val-desc">Cada reto geoespacial es diferente. Diseñamos soluciones a la medida, no plantillas genéricas.</p>
+        </div>
+        <div class="val-card">
+          <span class="val-icon">03</span>
+          <p class="val-name">Fundamentación</p>
+          <p class="val-desc">85 años de metodología rigurosa respaldan cada proyecto. El dato real siempre por encima de la estimación.</p>
+        </div>
+        <div class="val-card">
+          <span class="val-icon">04</span>
+          <p class="val-name">Tiempo real</p>
+          <p class="val-desc">Información geográfica viva, actualizada y accesible desde cualquier dispositivo en cualquier momento.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-band">
+    <div class="cta-band-bg"></div>
+    <div class="cta-inner">
+      <span class="section-eyebrow">Trabajemos juntos</span>
+      <h2 class="section-title">¿Tu reto necesita<br><strong>contexto geográfico?</strong></h2>
+      <p class="section-body">Cuéntanos tu proyecto. En menos de 24 horas te respondemos con una propuesta inicial sin costo.</p>
+      <div class="hero-actions">
+        <a href="https://wa.me/523336271552" target="_blank" rel="noreferrer" class="btn-primary">Cotizar por WhatsApp ↗</a>
+        <a href="mailto:contacto@cartodata.mx" class="btn-ghost">Enviar correo</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer inyectado por shared.js -->
+  <script src="./shared.js"></script>
+</body>
+</html>
