@@ -782,9 +782,9 @@
   /* ── Sección Nuestro Equipo — carrusel con timer ── */
   (function injectTeamCarousel() {
     const SLIDES = [
-      { src: '/equipo.avif',    label: 'Equipo Guadalajara' },
-      { src: '/equipo-nl.avif', label: 'Equipo Nuevo León'  },
-      { src: '/equipo-sv.avif', label: 'Equipo El Salvador' },
+      { src: './equipo.avif',    label: 'Equipo Guadalajara' },
+      { src: './equipo-nl.avif', label: 'Equipo Nuevo León'  },
+      { src: './equipo-sv.avif', label: 'Equipo El Salvador' },
     ];
     const DURATION = 5000;
     let current = 0, raf = null, start = null, paused = false;
@@ -1254,7 +1254,7 @@
       {
         key:   'procesos',
         tab:   'Procesos',
-        img:   '/herr-procesos.jpg',
+        img:   './herr-procesos.jpg',
         title: 'Procesos diseñados para la precisión territorial',
         body:  'Estructuramos flujos de trabajo geoespaciales que transforman datos complejos en decisiones claras. Cada proceso está diseñado para reducir tiempos, eliminar errores y generar resultados reproducibles a cualquier escala.',
         tags:  ['Metodología GIS', 'Análisis territorial', 'Flujos estructurados'],
@@ -1262,7 +1262,7 @@
       {
         key:   'datos',
         tab:   'Datos',
-        img:   '/herr-datos.jpg',
+        img:   './herr-datos.jpg',
         title: 'Datos geoespaciales con la más alta resolución',
         body:  'Integramos fuentes propias, satelitales y de campo para construir bases de datos georreferenciadas robustas. Información actualizada, validada y lista para análisis avanzados o visualización en tiempo real.',
         tags:  ['Imágenes satelitales', 'Levantamiento de campo', 'Bases georef'],
@@ -1270,7 +1270,7 @@
       {
         key:   'software',
         tab:   'Software',
-        img:   '/herr-software.jpg',
+        img:   './herr-software.jpg',
         title: 'Plataformas propias para cada reto geoespacial',
         body:  'eCarto y nuestras herramientas propias permiten consultar, analizar y gestionar información geográfica desde cualquier dispositivo. Sin licencias de terceros, sin limitaciones: tecnología hecha a la medida de cada proyecto.',
         tags:  ['eCarto Platform', 'Web GIS', 'Sin límites de usuario'],
