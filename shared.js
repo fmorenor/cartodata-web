@@ -333,7 +333,7 @@
     { label: 'Tecnología', href: './index.html#tecnologia', children: [
         { label: 'Procesos',    en: 'Processes',   href: './index.html#procesos'    },
         { label: 'Cartográfica',en: 'Cartographic',href: './cartografica.html'},
-        { label: 'GeoSoftware', en: 'GeoSoftware', href: './index.html#geosoftware' },
+        { label: 'GeoSoftware', en: 'GeoSoftware', href: './geosoftware.html' },
       ]},
     { label: 'Cultura',    href: './index.html#cultura',    children: [
         { label: 'Historia', en: 'History', href: './historia.html'        },
