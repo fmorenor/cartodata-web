@@ -4,7 +4,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
-/* ── Tokens de diseño — modo oscuro (default) ── */
+/* ── Tokens de diseño — modo oscuro (default absoluto) ── */
 :root {
   --blue:        #3b5bdb;
   --blue-dark:   #1e40af;
@@ -20,8 +20,8 @@
   --font-heading: 'Helvetica Neue', 'Neue Haas Grotesk', 'Arial', sans-serif;
 }
 
-/* ── Modo claro ── */
-:root:not(.dark) {
+/* ── Modo claro — solo cuando .light está explícitamente en <html> ── */
+html.light {
   --bg:      #f8fafc;
   --bg2:     #f1f5f9;
   --surface: rgba(0,0,0,0.03);

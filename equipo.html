@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Equipo — CartoData</title>
+  <meta name="description" content="Conoce al equipo de CartoData. Cuatro generaciones construyendo soluciones geoespaciales." />
+  <style>
+    /* ── Layout base ── */
+    body { padding-top: 0; }
+
+    /* ── Hero carrusel full screen ── */
+    .carousel-wrap {
+      position: relative; width: 100%; height: 100vh;
+      overflow: hidden;
+    }
+    .carousel-slide {
+      position: absolute; inset: 0;
+      opacity: 0; transition: opacity 900ms ease;
+    }
+    .carousel-slide.active { opacity: 1; }
+    .carousel-slide img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .carousel-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top,
+        rgba(5,8,22,0.92) 0%,
+        rgba(5,8,22,0.55) 28%,
+        rgba(5,8,22,0.0) 55%,
+        rgba(5,8,22,0.25) 100%);
+    }
+    /* Texto hero anclado al fondo */
+    .carousel-content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: flex-start; justify-content: flex-end;
+      text-align: left; padding: clamp(2rem,5vw,4rem);
+      padding-bottom: clamp(3.5rem,7vw,5rem);
+    }
+    .carousel-eyebrow {
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--blue-light);
+      margin-bottom: 1.2rem;
+    }
+    .carousel-title {
+      font-size: clamp(2.5rem,6vw,5rem);
+      color: #f8fafc; line-height: 1.05;
+      margin-bottom: 1rem; max-width: 720px;
+    }
+    .carousel-title strong { font-weight: 600; }
+    .carousel-subtitle {
+      font-size: clamp(0.9rem,1.5vw,1.1rem);
+      color: rgba(248,250,252,0.65); max-width: 500px; line-height: 1.7;
+    }
+    /* Label de oficina */
+    .carousel-label {
+      position: absolute; bottom: 2rem; left: 2.5rem;
+      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em;
+      text-transform: uppercase; color: rgba(248,250,252,0.6);
+    }
+    .carousel-dots {
+      position: absolute; bottom: 2rem; right: 2.5rem;
+      display: flex; gap: 8px; align-items: center;
+    }
+    .carousel-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(255,255,255,0.35); border: none; cursor: pointer;
+      padding: 0; transition: background 200ms, transform 200ms;
+    }
+    .carousel-dot.active { background: #fff; transform: scale(1.4); }
+
+    /* ── Sección valores ── */
+    .page-inner {
+      max-width: 1100px; margin: 0 auto;
+      padding: clamp(4rem,7vw,6rem) clamp(1.5rem,5vw,4rem);
+    }
+
+    /* ── Eyebrow / títulos ── */
+    .section-eyebrow {
+      display: inline-block; font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--blue-light);
+      margin-bottom: 1rem;
+    }
+    .section-eyebrow::before {
+      content: ''; display: inline-block;
+      width: 28px; height: 1.5px; background: var(--blue-light);
+      vertical-align: middle; margin-right: 0.6rem;
+    }
+    .section-title {
+      font-size: clamp(1.8rem,3.5vw,2.8rem);
+      line-height: 1.1; color: var(--text); margin-bottom: 1rem;
+    }
+    .section-title strong { font-weight: 600; }
+
+    /* ── FLOW section ── */
+    .flow-section { padding: clamp(5rem,9vw,8rem) 0 clamp(4rem,7vw,6rem); }
+    .flow-header { text-align: center; margin-bottom: clamp(3rem,5vw,5rem); }
+    .flow-super {
+      font-size: clamp(5rem,14vw,11rem); font-weight: 100; line-height: 1;
+      letter-spacing: -0.04em; color: transparent;
+      -webkit-text-stroke: 1px rgba(123,156,255,0.25);
+      user-select: none; margin-bottom: 0.5rem;
+    }
+    .flow-subtitle {
+      font-size: clamp(0.85rem,1.3vw,1rem); color: var(--muted);
+      letter-spacing: 0.18em; text-transform: uppercase; font-weight: 400;
+    }
+
+    /* Tabs */
+    .flow-tabs {
+      display: flex; gap: 0; border-bottom: 1px solid var(--border);
+      margin-bottom: 0; overflow-x: auto; scrollbar-width: none;
+    }
+    .flow-tabs::-webkit-scrollbar { display: none; }
+    .flow-tab {
+      flex: 1; min-width: 120px; background: none; border: none;
+      cursor: pointer; padding: 1.8rem 1rem 1.6rem;
+      display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
+      position: relative; transition: background 250ms;
+    }
+    .flow-tab::after {
+      content: ''; position: absolute; bottom: -1px; left: 0; right: 0;
+      height: 2px; background: var(--blue-light); opacity: 0;
+      transition: opacity 250ms;
+    }
+    .flow-tab.active::after { opacity: 1; }
+    .flow-tab-letter {
+      width: 56px; height: 56px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; font-weight: 700; font-family: var(--font-heading);
+      background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+      color: var(--muted); transition: background 250ms, color 250ms, border-color 250ms, transform 250ms;
+    }
+    .flow-tab.active .flow-tab-letter,
+    .flow-tab:hover .flow-tab-letter {
+      background: var(--blue); border-color: var(--blue);
+      color: #fff; transform: translateY(-3px);
+    }
+    .flow-tab-name {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted);
+      transition: color 250ms;
+    }
+    .flow-tab.active .flow-tab-name { color: var(--blue-light); }
+
+    /* Panel */
+    .flow-panels { position: relative; min-height: 320px; }
+    .flow-panel {
+      display: none; padding: clamp(2.5rem,4vw,3.5rem) 0;
+      animation: panelIn 350ms ease;
+    }
+    .flow-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem,5vw,5rem); align-items: start; }
+    @keyframes panelIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .flow-panel-left {}
+    .flow-panel-tag {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--blue-light);
+      margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;
+    }
+    .flow-panel-tag::before {
+      content: ''; width: 24px; height: 1.5px; background: var(--blue-light);
+    }
+    .flow-panel-title {
+      font-size: clamp(2rem,3.5vw,3rem); font-weight: 100;
+      letter-spacing: -0.02em; color: var(--text); margin-bottom: 1.25rem; line-height: 1.1;
+    }
+    .flow-panel-desc {
+      font-size: clamp(0.9rem,1.3vw,1.05rem); color: var(--muted);
+      line-height: 1.75; font-family: var(--font-sans);
+    }
+    .flow-panel-desc strong { color: var(--text); font-weight: 600; }
+    .flow-panel-right {}
+    .flow-bullets {
+      list-style: none; display: flex; flex-direction: column; gap: 0.65rem;
+    }
+    .flow-bullets li {
+      display: flex; align-items: baseline; gap: 0.75rem;
+      font-size: 0.9rem; color: var(--muted); line-height: 1.5;
+      padding: 0.6rem 0.9rem; border-radius: 8px;
+      border: 1px solid transparent;
+      transition: border-color 200ms, color 200ms, background 200ms;
+    }
+    .flow-bullets li:hover {
+      border-color: var(--border); color: var(--text);
+      background: rgba(59,91,219,0.06);
+    }
+    .flow-bullets li::before {
+      content: ''; width: 5px; height: 5px; border-radius: 50%;
+      background: var(--blue-light); flex-shrink: 0; margin-top: 0.35em;
+    }
+
+    @media (max-width: 700px) {
+      .flow-panel.active { grid-template-columns: 1fr; }
+      .flow-tab { min-width: 80px; padding: 1.4rem 0.5rem 1.2rem; }
+      .flow-tab-letter { width: 44px; height: 44px; font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero carrusel full screen -->
+  <div class="carousel-wrap" id="eq-carousel">
+    <div class="carousel-slide active">
+      <img src="./images/equipo.avif" alt="Equipo Guadalajara" />
+      <div class="carousel-overlay"></div>
+    </div>
+    <div class="carousel-slide">
+      <img src="./images/equipo-nl.avif" alt="Equipo Nuevo León" />
+      <div class="carousel-overlay"></div>
+    </div>
+    <div class="carousel-slide">
+      <img src="./images/equipo-sv.avif" alt="Equipo El Salvador" />
+      <div class="carousel-overlay"></div>
+    </div>
+    <!-- Contenido centrado sobre las fotos -->
+    <div class="carousel-content">
+      <span class="carousel-eyebrow">Equipo</span>
+      <h1 class="carousel-title">Las personas detrás<br>de <strong>cada mapa.</strong></h1>
+      <p class="carousel-subtitle">Más de 150 colaboradores en cinco oficinas, unidos por la misma convicción: el territorio bien entendido cambia decisiones.</p>
+    </div>
+    <span class="carousel-label" id="eq-label">Equipo Guadalajara</span>
+    <div class="carousel-dots">
+      <button class="carousel-dot active" data-i="0" data-label="Equipo Guadalajara"></button>
+      <button class="carousel-dot"        data-i="1" data-label="Equipo Nuevo León"></button>
+      <button class="carousel-dot"        data-i="2" data-label="Equipo El Salvador"></button>
+    </div>
+  </div>
+
+  <!-- FLOW Values -->
+  <section class="flow-section">
+    <div class="page-inner" style="padding-top:0;padding-bottom:0;">
+
+      <div class="flow-header">
+        <div class="flow-super">FLOW</div>
+        <p class="flow-subtitle">Los valores que nos mueven</p>
+      </div>
+
+      <!-- Tabs -->
+      <div class="flow-tabs" role="tablist">
+        <button class="flow-tab active" data-flow="f" role="tab" aria-selected="true">
+          <span class="flow-tab-letter">F</span>
+          <span class="flow-tab-name">Fluidez</span>
+        </button>
+        <button class="flow-tab" data-flow="l" role="tab" aria-selected="false">
+          <span class="flow-tab-letter">L</span>
+          <span class="flow-tab-name">Lealtad</span>
+        </button>
+        <button class="flow-tab" data-flow="o" role="tab" aria-selected="false">
+          <span class="flow-tab-letter">O</span>
+          <span class="flow-tab-name">Originalidad</span>
+        </button>
+        <button class="flow-tab" data-flow="w" role="tab" aria-selected="false">
+          <span class="flow-tab-letter">W</span>
+          <span class="flow-tab-name">Wellness</span>
+        </button>
+      </div>
+
+      <!-- Panels -->
+      <div class="flow-panels">
+
+        <div class="flow-panel active" data-flow="f">
+          <div class="flow-panel-left">
+            <span class="flow-panel-tag">Fluidez</span>
+            <h2 class="flow-panel-title">Para que las cosas fluyan se necesitan muchas cosas.</h2>
+            <p class="flow-panel-desc">Cuando cada persona del equipo actúa con claridad, comparte lo que sabe y construye en lugar de frenar, el trabajo avanza solo.</p>
+          </div>
+          <div class="flow-panel-right">
+            <ul class="flow-bullets">
+              <li>Hacer las cosas bien desde la primera vez</li>
+              <li>Compartir información oportunamente</li>
+              <li>Saber lo que estamos haciendo</li>
+              <li>Fundamentar nuestras decisiones en datos</li>
+              <li>Enseñar a los demás y compartir el conocimiento</li>
+              <li>Tener el conocimiento disponible</li>
+              <li>No ser conflictivo</li>
+              <li>No quejarse</li>
+              <li>Construir</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="flow-panel" data-flow="l">
+          <div class="flow-panel-left">
+            <span class="flow-panel-tag">Lealtad</span>
+            <h2 class="flow-panel-title">Existiendo lealtad, hay confianza y hay flow.</h2>
+            <p class="flow-panel-desc">La lealtad genera armonía y seguridad entre las personas. No es solo hacia la empresa — empieza desde adentro.</p>
+          </div>
+          <div class="flow-panel-right">
+            <ul class="flow-bullets">
+              <li>A mi mismo</li>
+              <li>A mi familia</li>
+              <li>A mi creencia</li>
+              <li>A mi tribu</li>
+              <li>A mi actividad</li>
+              <li>A los principios científicos</li>
+              <li>A mi ética</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="flow-panel" data-flow="o">
+          <div class="flow-panel-left">
+            <span class="flow-panel-tag">Originalidad</span>
+            <h2 class="flow-panel-title">Cuando algo no existe, es una oportunidad — no un problema.</h2>
+            <p class="flow-panel-desc">El DNA de CartoData es de <strong>innovación</strong>. Escribimos nuestras propias herramientas, integramos piezas de forma poco común y tenemos modelos de negocio diferentes. Lo cuál nos hace <strong>únicos</strong>.<br><br>No copiamos — creamos.</p>
+          </div>
+          <div class="flow-panel-right" style="display:flex;align-items:center;justify-content:center;">
+            <div style="font-size:clamp(5rem,12vw,9rem);font-weight:100;letter-spacing:-0.05em;color:transparent;-webkit-text-stroke:1px rgba(123,156,255,0.3);line-height:1;text-align:center;">
+              No<br>copiamos,<br>creamos.
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-panel" data-flow="w">
+          <div class="flow-panel-left">
+            <span class="flow-panel-tag">Wellness · Bienestar</span>
+            <h2 class="flow-panel-title">CartoData es una máquina de sueños.</h2>
+            <p class="flow-panel-desc">Estamos formados por personas, y si las personas no funcionan, tampoco la organización. Cada uno somos parte del engranaje de una compleja maquinaria llamada CartoData.</p>
+          </div>
+          <div class="flow-panel-right">
+            <ul class="flow-bullets">
+              <li>Cuidar nuestra salud física, mental y económica es nuestra prioridad</li>
+              <li>Cada uno somos parte del engranaje de CartoData</li>
+              <li>Las metas de los colaboradores son las metas de la organización</li>
+            </ul>
+          </div>
+        </div>
+
+      </div><!-- /flow-panels -->
+
+    </div>
+  </section>
+
+  <script>
+    // FLOW tabs
+    (function() {
+      const tabs   = document.querySelectorAll('.flow-tab');
+      const panels = document.querySelectorAll('.flow-panel');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const key = tab.dataset.flow;
+          tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+          panels.forEach(p => p.classList.remove('active'));
+          tab.classList.add('active');
+          tab.setAttribute('aria-selected','true');
+          document.querySelector(`.flow-panel[data-flow="${key}"]`).classList.add('active');
+        });
+      });
+    })();
+  </script>
+
+  <script>
+    (function() {
+      const slides = document.querySelectorAll('#eq-carousel .carousel-slide');
+      const dots   = document.querySelectorAll('#eq-carousel .carousel-dot');
+      let cur = 0, timer;
+
+      function goTo(i) {
+        slides[cur].classList.remove('active');
+        dots[cur].classList.remove('active');
+        cur = i;
+        slides[cur].classList.add('active');
+        dots[cur].classList.add('active');
+      }
+
+      function next() { goTo((cur + 1) % slides.length); }
+
+      dots.forEach(d => d.addEventListener('click', () => {
+        clearInterval(timer);
+        goTo(+d.dataset.i);
+        timer = setInterval(next, 5000);
+      }));
+
+      timer = setInterval(next, 5000);
+    })();
+  </script>
+
+  <script src="./shared.js"></script>
+</body>
+</html>

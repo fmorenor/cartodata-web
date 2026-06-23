@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cartográfica — CartoData</title>
+  <meta name="description" content="Tecnología cartográfica de precisión: LiDAR 3D, OBLIX fotografía oblicua y Visión 360 panorámica." />
+  <style>
+    body { padding-top: 0; }
+
+    /* ── Hero carousel ── */
+    .carousel-wrap {
+      position: relative; width: 100%; height: 100vh; overflow: hidden;
+    }
+    .carousel-slide {
+      position: absolute; inset: 0;
+      opacity: 0; transition: opacity 900ms ease;
+    }
+    .carousel-slide.active { opacity: 1; }
+    .carousel-slide img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    /* Color tint per technology */
+    .slide-lidar  { background: #050816; }
+    .slide-oblix  { background: #050816; }
+    .slide-v360   { background: #050816; }
+
+    .carousel-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top,
+        rgba(5,8,22,0.92) 0%,
+        rgba(5,8,22,0.45) 30%,
+        rgba(5,8,22,0.0)  55%,
+        rgba(5,8,22,0.25) 100%);
+    }
+
+    .carousel-content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: flex-start; justify-content: flex-end;
+      padding: clamp(2rem,5vw,4rem);
+      padding-bottom: clamp(3.5rem,7vw,5.5rem);
+    }
+    .carousel-eyebrow {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.22em;
+      text-transform: uppercase; margin-bottom: 0.9rem;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .carousel-eyebrow span { display: inline-block; width: 24px; height: 1.5px; background: currentColor; }
+    .slide-lidar .carousel-eyebrow { color: #7b9cff; }
+    .slide-oblix .carousel-eyebrow { color: #5ecfb1; }
+    .slide-v360  .carousel-eyebrow { color: #b57bff; }
+
+    .carousel-title {
+      font-size: clamp(2.8rem,7vw,6rem);
+      color: #f8fafc; line-height: 1.0; margin-bottom: 0.9rem;
+      max-width: 760px;
+    }
+    .carousel-title strong { font-weight: 600; }
+    .carousel-subtitle {
+      font-size: clamp(0.88rem,1.4vw,1.05rem);
+      color: rgba(248,250,252,0.6); max-width: 480px; line-height: 1.75;
+      margin-bottom: 1.6rem;
+    }
+    .carousel-cta {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; text-decoration: none;
+      padding: 0.65rem 1.4rem; border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; background: rgba(255,255,255,0.07);
+      backdrop-filter: blur(8px);
+      transition: background 200ms, border-color 200ms;
+    }
+    .carousel-cta:hover { background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.35); }
+
+    .carousel-label {
+      position: absolute; bottom: 2rem; right: 2.5rem;
+      font-size: 0.68rem; font-weight: 500; letter-spacing: 0.14em;
+      text-transform: uppercase; color: rgba(248,250,252,0.45);
+    }
+    .carousel-dots {
+      position: absolute; bottom: 1.8rem; left: clamp(2rem,5vw,4rem);
+      display: flex; gap: 10px; align-items: center;
+    }
+    .carousel-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(255,255,255,0.3); border: none; cursor: pointer;
+      padding: 0; transition: background 200ms, transform 200ms;
+    }
+    .carousel-dot.active { background: #fff; transform: scale(1.45); }
+
+    /* ── Page wrapper ── */
+    .page-inner {
+      max-width: 1100px; margin: 0 auto;
+      padding: 0 clamp(1.5rem,5vw,4rem);
+    }
+
+    /* ── Section base ── */
+    .tech-section {
+      padding: clamp(5rem,9vw,8rem) 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .tech-section:last-child { border-bottom: none; }
+
+    /* Eyebrow */
+    .section-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.22em;
+      text-transform: uppercase; margin-bottom: 1.2rem;
+    }
+    .section-eyebrow::before {
+      content: ''; width: 24px; height: 1.5px; background: currentColor;
+    }
+    .eyebrow-lidar { color: #7b9cff; }
+    .eyebrow-oblix { color: #5ecfb1; }
+    .eyebrow-v360  { color: #b57bff; }
+
+    /* Tech header */
+    .tech-header {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem,5vw,5rem); align-items: start;
+      margin-bottom: clamp(3rem,5vw,5rem);
+    }
+    .tech-header.reverse { direction: rtl; }
+    .tech-header.reverse > * { direction: ltr; }
+
+    .tech-title {
+      font-size: clamp(2.2rem,4vw,3.5rem);
+      line-height: 1.05; color: var(--text); margin-bottom: 1.2rem;
+    }
+    .tech-title strong { font-weight: 600; }
+    .tech-tagline {
+      font-size: clamp(1rem,1.6vw,1.2rem);
+      color: var(--muted); line-height: 1.75; margin-bottom: 1.5rem;
+    }
+    .tech-badge {
+      display: inline-block; font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.35rem 0.9rem; border-radius: 100px;
+      border: 1px solid currentColor; margin-bottom: 2rem;
+    }
+    .badge-lidar { color: #7b9cff; }
+    .badge-oblix { color: #5ecfb1; }
+    .badge-v360  { color: #b57bff; }
+
+    /* Spec card */
+    .spec-block {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 2rem;
+      display: flex; flex-direction: column; gap: 1.25rem;
+    }
+    .spec-item { display: flex; flex-direction: column; gap: 0.25rem; }
+    .spec-label {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .spec-value {
+      font-size: 1.05rem; font-weight: 500; color: var(--text);
+    }
+    .spec-divider {
+      height: 1px; background: var(--border); margin: 0 -0.5rem;
+    }
+
+    /* Image panel */
+    .tech-image {
+      border-radius: 16px; overflow: hidden;
+      border: 1px solid var(--border); aspect-ratio: 4/3;
+      background: rgba(255,255,255,0.03);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .tech-image img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .tech-image-placeholder {
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; gap: 1rem; opacity: 0.25;
+    }
+    .tip-letter {
+      font-size: 5rem; font-weight: 100; letter-spacing: -0.04em;
+      font-family: var(--font-heading);
+    }
+
+    /* Use cases grid */
+    .usecases-title {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 1.5rem; margin-top: clamp(2.5rem,4vw,4rem);
+    }
+    .usecases-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+    }
+    .usecase-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border); border-radius: 12px;
+      padding: 1.4rem 1.2rem;
+      transition: border-color 250ms, transform 250ms, background 250ms;
+    }
+    .usecase-card:hover {
+      transform: translateY(-3px);
+      background: rgba(255,255,255,0.05);
+    }
+    .usecase-lidar:hover { border-color: rgba(123,156,255,0.4); }
+    .usecase-oblix:hover { border-color: rgba(94,207,177,0.4); }
+    .usecase-v360:hover  { border-color: rgba(181,123,255,0.4); }
+
+    .usecase-icon {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; margin-bottom: 0.6rem; display: block;
+    }
+    .usecase-name {
+      font-size: 0.88rem; font-weight: 600; color: var(--text);
+      margin-bottom: 0.35rem;
+    }
+    .usecase-desc {
+      font-size: 0.76rem; color: var(--muted); line-height: 1.6;
+    }
+
+    /* Bullet list */
+    .feat-list {
+      list-style: none; display: flex; flex-direction: column; gap: 0.6rem;
+      margin-top: 1.5rem;
+    }
+    .feat-list li {
+      display: flex; align-items: baseline; gap: 0.75rem;
+      font-size: 0.88rem; color: var(--muted); line-height: 1.55;
+    }
+    .feat-list li::before {
+      content: ''; width: 5px; height: 5px; border-radius: 50%;
+      background: currentColor; flex-shrink: 0; margin-top: 0.35em;
+    }
+    .feats-lidar li::before { color: #7b9cff; }
+    .feats-oblix li::before { color: #5ecfb1; }
+    .feats-v360  li::before { color: #b57bff; }
+
+    /* CTA strip */
+    .cta-strip {
+      padding: clamp(4rem,7vw,6rem) 0;
+      text-align: center;
+    }
+    .cta-strip h2 {
+      font-size: clamp(1.8rem,3vw,2.8rem); margin-bottom: 1rem; color: var(--text);
+    }
+    .cta-strip p { color: var(--muted); margin-bottom: 2rem; font-size: 1rem; }
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--blue); color: #fff;
+      padding: 0.85rem 2rem; border-radius: 10px;
+      font-size: 0.88rem; font-weight: 700; letter-spacing: 0.06em;
+      text-transform: uppercase; text-decoration: none;
+      transition: background 200ms, transform 200ms;
+    }
+    .cta-btn:hover { background: var(--blue-dark); transform: translateY(-2px); }
+
+    /* ── OBLIX parallax hero ── */
+    .oblix-parallax {
+      position: relative; overflow: hidden;
+      min-height: 80vh;
+      display: flex; align-items: center;
+    }
+    .oblix-parallax-bg {
+      position: absolute; inset: -15% 0;
+      background-image: url('./images/oblix2.jpg');
+      background-size: cover; background-position: center;
+      will-change: transform;
+    }
+    .oblix-parallax-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        105deg,
+        rgba(5,8,22,0.92) 0%,
+        rgba(5,8,22,0.75) 45%,
+        rgba(5,8,22,0.25) 100%
+      );
+    }
+    html.light .oblix-parallax-overlay {
+      background: linear-gradient(
+        105deg,
+        rgba(241,245,249,0.93) 0%,
+        rgba(241,245,249,0.75) 45%,
+        rgba(241,245,249,0.15) 100%
+      );
+    }
+    .oblix-parallax-content {
+      position: relative; z-index: 1;
+      max-width: 1100px; margin: 0 auto;
+      padding: clamp(4rem,8vw,7rem) clamp(1.5rem,5vw,4rem);
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem,5vw,5rem); align-items: center;
+    }
+    @media (max-width: 800px) {
+      .oblix-parallax-content { grid-template-columns: 1fr; }
+    }
+
+    /* Visión 360 image — adapts to dark/light mode */
+    .img-v360 {
+      filter: none;
+      transition: filter 400ms;
+    }
+    html.light .img-v360 {
+      filter: brightness(1.08) saturate(0.9);
+    }
+
+    /* Responsive */
+    @media (max-width: 800px) {
+      .tech-header, .tech-header.reverse { grid-template-columns: 1fr; direction: ltr; }
+      .usecases-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 500px) {
+      .usecases-grid { grid-template-columns: 1fr; }
+      .carousel-label { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Hero Carousel ── -->
+  <div class="carousel-wrap" id="cg-carousel">
+
+    <!-- Slide 1: LiDAR -->
+    <div class="carousel-slide active slide-lidar">
+      <img src="./images/herr-procesos.jpg" alt="LiDAR 3D" />
+      <div class="carousel-overlay"></div>
+      <div class="carousel-content">
+        <span class="carousel-eyebrow"><span></span>LiDAR · Nube de puntos 3D</span>
+        <h1 class="carousel-title">Descubre los<br>detalles <strong>ocultos</strong><br>en el territorio.</h1>
+        <p class="carousel-subtitle">Hasta 400,000 puntos por segundo. Modelos 3D del terreno con precisión centimétrica, desde el aire.</p>
+        <a href="#lidar" class="carousel-cta">Ver tecnología →</a>
+      </div>
+    </div>
+
+    <!-- Slide 2: OBLIX -->
+    <div class="carousel-slide slide-oblix">
+      <img src="./images/oblix1.jpg" alt="OBLIX Fotografía Oblicua" />
+      <div class="carousel-overlay"></div>
+      <div class="carousel-content">
+        <span class="carousel-eyebrow"><span></span>OBLIX · Fotografía Aérea Oblicua</span>
+        <h1 class="carousel-title">Cuando la vista<br>nadir no lo <strong>dice todo.</strong></h1>
+        <p class="carousel-subtitle">5 cámaras × 80 Mpx = 400 megapixeles por toma. Fachadas, alturas y superficies invisibles para la fotografía vertical.</p>
+        <a href="#oblix" class="carousel-cta">Ver tecnología →</a>
+      </div>
+    </div>
+
+    <!-- Slide 3: Visión 360 -->
+    <div class="carousel-slide slide-v360">
+      <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block;">
+        <source src="./images/vision360.mp4" type="video/mp4" />
+      </video>
+      <div class="carousel-overlay"></div>
+      <div class="carousel-content">
+        <span class="carousel-eyebrow"><span></span>Visión 360 · Cartografía Panorámica</span>
+        <h1 class="carousel-title">Todas las calles<br>a tu <strong>alcance.</strong></h1>
+        <p class="carousel-subtitle">Panorámicas fotográficas georreferenciadas a pie de calle. Cuando quieras, donde quieras, integradas con tus sistemas.</p>
+        <a href="#vision360" class="carousel-cta">Ver tecnología →</a>
+      </div>
+    </div>
+
+    <span class="carousel-label" id="cg-label">LiDAR 3D</span>
+    <div class="carousel-dots">
+      <button class="carousel-dot active" data-i="0" data-label="LiDAR 3D"></button>
+      <button class="carousel-dot"        data-i="1" data-label="OBLIX Oblicua"></button>
+      <button class="carousel-dot"        data-i="2" data-label="Visión 360"></button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       SECCIÓN 1: LiDAR
+  ══════════════════════════════ -->
+  <section class="tech-section" id="lidar">
+    <div class="page-inner">
+
+      <span class="section-eyebrow eyebrow-lidar">Tecnología LiDAR</span>
+
+      <div class="tech-header">
+        <div>
+          <div class="tech-badge badge-lidar">Light Detection and Ranging</div>
+          <h2 class="tech-title">Modelos 3D del<br>territorio con<br><strong>precisión láser.</strong></h2>
+          <p class="tech-tagline">LiDAR genera, mediante emisiones de impulsos láser, un modelo del terreno representado por una nube de puntos georreferenciados en tres dimensiones.</p>
+          <ul class="feat-list feats-lidar">
+            <li>Captura hasta <strong style="color:var(--text)">400,000 puntos por segundo</strong></li>
+            <li>Genera mallas y modelos 3D desde nubes de puntos</li>
+            <li>Clasifica puntos: terreno, estructuras, vegetación</li>
+            <li>Calcula volúmenes y áreas con precisión centimétrica</li>
+            <li>Mide y contabiliza objetos en el territorio</li>
+          </ul>
+        </div>
+        <div class="tech-image">
+          <img src="./images/lidar.jpg" alt="LiDAR 3D punto cloud" />
+        </div>
+      </div>
+
+      <p class="usecases-title">¿Por qué necesito LiDAR?</p>
+      <div class="usecases-grid">
+        <div class="usecase-card usecase-lidar">
+          <span class="usecase-icon eyebrow-lidar">Urbanismo</span>
+          <p class="usecase-name">Modelos urbanos 3D</p>
+          <p class="usecase-desc">Control de alturas, estudios de propagación de señal y planificación urbana con modelos de ciudad precisos.</p>
+        </div>
+        <div class="usecase-card usecase-lidar">
+          <span class="usecase-icon eyebrow-lidar">Entorno Natural</span>
+          <p class="usecase-name">Inventario forestal</p>
+          <p class="usecase-desc">Estimación de volumen de biomasa y análisis de cobertura vegetal con clasificación automática de puntos.</p>
+        </div>
+        <div class="usecase-card usecase-lidar">
+          <span class="usecase-icon eyebrow-lidar">Catastro</span>
+          <p class="usecase-name">Mapas temáticos</p>
+          <p class="usecase-desc">Cuantificación de cambios de superficie y generación de mapas temáticos para actualización catastral.</p>
+        </div>
+        <div class="usecase-card usecase-lidar">
+          <span class="usecase-icon eyebrow-lidar">Arqueología</span>
+          <p class="usecase-name">Topografía de precisión</p>
+          <p class="usecase-desc">Levantamientos topográficos precisos con capacidad de penetrar vegetación y revelar estructuras ocultas.</p>
+        </div>
+        <div class="usecase-card usecase-lidar">
+          <span class="usecase-icon eyebrow-lidar">Minería</span>
+          <p class="usecase-name">Volúmenes extraídos</p>
+          <p class="usecase-desc">Cuantificación exacta de material extraído y seguimiento de avance en operaciones mineras a cielo abierto.</p>
+        </div>
+        <div class="usecase-card usecase-lidar">
+          <span class="usecase-icon eyebrow-lidar">Obra Civil</span>
+          <p class="usecase-name">Inspección de infraestructura</p>
+          <p class="usecase-desc">Inspección de líneas eléctricas, ductos e infraestructura crítica con detección automática de intrusiones.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════
+       SECCIÓN 2: OBLIX
+  ══════════════════════════════ -->
+  <section class="tech-section" id="oblix" style="padding:0; border-bottom: 1px solid var(--border);">
+
+    <!-- Parallax hero -->
+    <div class="oblix-parallax">
+      <div class="oblix-parallax-bg" id="oblix-bg"></div>
+      <div class="oblix-parallax-overlay"></div>
+      <div class="oblix-parallax-content">
+        <!-- Texto izquierda -->
+        <div>
+          <span class="section-eyebrow eyebrow-oblix" style="margin-bottom:1.4rem;">Fotografía Oblicua</span>
+          <div class="tech-badge badge-oblix" style="margin-bottom:1.4rem;">OBLiX® · Sistema Aerofotogramétrico</div>
+          <h2 class="tech-title">Cuatro ángulos.<br>Un solo<br><strong>sobrevuelo.</strong></h2>
+          <p class="tech-tagline" style="margin-top:1rem;">OBLiX® integra tomas fotográficas, procesamiento y disponibilidad de datos en la palma de su mano. Mide alturas, distancias y superficies invisibles para la fotografía vertical.</p>
+        </div>
+        <!-- Spec card derecha -->
+        <div class="spec-block" style="background:rgba(5,8,22,0.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);">
+          <div class="spec-item">
+            <span class="spec-label">Cámaras en el sistema</span>
+            <span class="spec-value">5 cámaras · 4 oblicuas 45° + 1 nadir</span>
+          </div>
+          <div class="spec-divider"></div>
+          <div class="spec-item">
+            <span class="spec-label">Resolución por toma</span>
+            <span class="spec-value">400 megapixeles combinados</span>
+          </div>
+          <div class="spec-divider"></div>
+          <div class="spec-item">
+            <span class="spec-label">Resolución por cámara</span>
+            <span class="spec-value">80 megapixeles</span>
+          </div>
+          <div class="spec-divider"></div>
+          <div class="spec-item">
+            <span class="spec-label">Integración</span>
+            <span class="spec-value">AU4 (estación fotogramétrica) + eCarto (visor web)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-inner">
+
+      <p class="usecases-title">¿Por qué necesito OBLIX?</p>
+      <div class="usecases-grid">
+        <div class="usecase-card usecase-oblix">
+          <span class="usecase-icon eyebrow-oblix">Smart Cities</span>
+          <p class="usecase-name">IoT e implementación urbana</p>
+          <p class="usecase-desc">Documentación del entorno urbano para implementación de sensores y servicios de ciudad inteligente.</p>
+        </div>
+        <div class="usecase-card usecase-oblix">
+          <span class="usecase-icon eyebrow-oblix">Seguridad</span>
+          <p class="usecase-name">Seguridad pública</p>
+          <p class="usecase-desc">Análisis del entorno urbano para planeación de vigilancia, iluminación y respuesta a emergencias.</p>
+        </div>
+        <div class="usecase-card usecase-oblix">
+          <span class="usecase-icon eyebrow-oblix">Catastro</span>
+          <p class="usecase-name">Registro catastral</p>
+          <p class="usecase-desc">Captura de fachadas y características constructivas para actualización y valuación predial masiva.</p>
+        </div>
+        <div class="usecase-card usecase-oblix">
+          <span class="usecase-icon eyebrow-oblix">Protección Civil</span>
+          <p class="usecase-name">Gestión de riesgos</p>
+          <p class="usecase-desc">Modelado del entorno para planes de evacuación, análisis de vulnerabilidad e inspección post-siniestro.</p>
+        </div>
+        <div class="usecase-card usecase-oblix">
+          <span class="usecase-icon eyebrow-oblix">Urbanismo</span>
+          <p class="usecase-name">Planeación urbana</p>
+          <p class="usecase-desc">Visión completa del tejido urbano para estudios de movilidad, densidad y uso de suelo.</p>
+        </div>
+        <div class="usecase-card usecase-oblix">
+          <span class="usecase-icon eyebrow-oblix">Infraestructura</span>
+          <p class="usecase-name">Inspección de redes</p>
+          <p class="usecase-desc">Inspección de líneas eléctricas, ductos y obra civil con vista lateral detallada de elementos verticales.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════
+       SECCIÓN 3: Visión 360
+  ══════════════════════════════ -->
+  <section class="tech-section" id="vision360">
+    <div class="page-inner">
+
+      <span class="section-eyebrow eyebrow-v360">Cartografía Terrestre</span>
+
+      <div class="tech-header">
+        <div>
+          <div class="tech-badge badge-v360">Visión 360® · Panorámica Georreferenciada</div>
+          <h2 class="tech-title">Cada calle,<br>cada fachada,<br><strong>georeferenciada.</strong></h2>
+          <p class="tech-tagline">Visión 360® es una solución de imagen y visualización en 360° que genera panorámicas fotográficas georreferenciadas a pie de calle, desarrollada por CartoData e integrada con el visor eCarto.</p>
+          <ul class="feat-list feats-v360">
+            <li>Metadata georreferenciada en cada toma</li>
+            <li>Alta resolución con sistema GPS/IMU de navegación</li>
+            <li>Interfaz web multi-plataforma (móvil y escritorio)</li>
+            <li>Compatible con QGIS y ArcGIS vía eCarto</li>
+            <li>Define zonas y frecuencias de captura a la medida</li>
+          </ul>
+        </div>
+        <div class="tech-image tech-image-v360">
+          <img src="./images/v360.jpg" alt="Visión 360 panorámica" class="img-v360" />
+        </div>
+      </div>
+
+      <p class="usecases-title">¿Por qué necesito Visión 360?</p>
+      <div class="usecases-grid">
+        <div class="usecase-card usecase-v360">
+          <span class="usecase-icon eyebrow-v360">Smart Cities</span>
+          <p class="usecase-name">Actualización urbana</p>
+          <p class="usecase-desc">Captura continua del entorno urbano para actualización de IoT e inventario de mobiliario y señalética.</p>
+        </div>
+        <div class="usecase-card usecase-v360">
+          <span class="usecase-icon eyebrow-v360">Infraestructura</span>
+          <p class="usecase-name">Evaluación de redes</span>
+          <p class="usecase-desc">Evaluación del estado de postes, luminarias, conexiones y servicios a lo largo de vialidades.</p>
+        </div>
+        <div class="usecase-card usecase-v360">
+          <span class="usecase-icon eyebrow-v360">Catastro</span>
+          <p class="usecase-name">Identificación de uso de suelo</p>
+          <p class="usecase-desc">Identificación de usos de suelo, números oficiales y segmentos de mercado a escala de calle.</p>
+        </div>
+        <div class="usecase-card usecase-v360">
+          <span class="usecase-icon eyebrow-v360">Marketing</span>
+          <p class="usecase-name">Tours virtuales</p>
+          <p class="usecase-desc">Recorridos virtuales para promoción de propiedades, destinos turísticos y desarrollos inmobiliarios.</p>
+        </div>
+        <div class="usecase-card usecase-v360">
+          <span class="usecase-icon eyebrow-v360">Registro Público</span>
+          <p class="usecase-name">Visualización predial</p>
+          <p class="usecase-desc">Vinculación de frentes de propiedad con datos catastrales para inspección remota y verificación.</p>
+        </div>
+        <div class="usecase-card usecase-v360">
+          <span class="usecase-icon eyebrow-v360">Inmobiliaria</span>
+          <p class="usecase-name">Seguimiento de obra</p>
+          <p class="usecase-desc">Documentación periódica del avance de construcciones y desarrollos inmobiliarios desde la calle.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── CTA Final ── -->
+  <div class="cta-strip">
+    <div class="page-inner">
+      <h2>¿Listo para ver tu territorio en <strong>otra dimensión?</strong></h2>
+      <p>Nuestro equipo te asesora en la tecnología adecuada para tu proyecto.</p>
+      <a href="https://wa.me/523336271552" target="_blank" rel="noopener" class="cta-btn">
+        Solicitar cotización →
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // Parallax OBLIX
+    (function () {
+      const bg = document.getElementById('oblix-bg');
+      if (!bg) return;
+      function onScroll() {
+        const rect = bg.parentElement.getBoundingClientRect();
+        const progress = -rect.top / (rect.height + window.innerHeight);
+        const offset = progress * 30; // max 30% shift
+        bg.style.transform = `translateY(${offset}%)`;
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+  </script>
+
+  <script>
+    (function () {
+      const slides = document.querySelectorAll('#cg-carousel .carousel-slide');
+      const dots   = document.querySelectorAll('#cg-carousel .carousel-dot');
+      const label  = document.getElementById('cg-label');
+      let cur = 0, timer;
+
+      function goTo(i) {
+        slides[cur].classList.remove('active');
+        dots[cur].classList.remove('active');
+        cur = i;
+        slides[cur].classList.add('active');
+        dots[cur].classList.add('active');
+        if (label) label.textContent = dots[cur].dataset.label;
+      }
+
+      function next() { goTo((cur + 1) % slides.length); }
+
+      dots.forEach(d => d.addEventListener('click', () => {
+        clearInterval(timer);
+        goTo(+d.dataset.i);
+        timer = setInterval(next, 6000);
+      }));
+
+      timer = setInterval(next, 6000);
+    })();
+  </script>
+
+  <script src="./shared.js"></script>
+</body>
+</html>

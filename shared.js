@@ -22,23 +22,23 @@
       border-bottom: 1px solid rgba(255,255,255,0.07);
       font-family: 'DM Sans', 'Inter', system-ui, sans-serif;
     }
-    :root:not(.dark) .cd-nav {
+    html.light .cd-nav {
       background: rgba(248,250,252,0.88);
       border-bottom: 1px solid rgba(0,0,0,0.08);
     }
-    :root:not(.dark) .cd-nav-brand { color: #0f172a; }
-    :root:not(.dark) .cd-nav-links {
+    html.light .cd-nav-brand { color: #0f172a; }
+    html.light .cd-nav-links {
       background: rgba(0,0,0,0.04);
       border-color: rgba(0,0,0,0.1);
     }
-    :root:not(.dark) .cd-nav-links a { color: rgba(15,23,42,0.55); }
-    :root:not(.dark) .cd-nav-links a:hover { color: #0f172a; background: rgba(0,0,0,0.05); }
-    :root:not(.dark) .cd-nav-links a.cd-active { color: #0f172a; background: rgba(0,0,0,0.06); }
-    :root:not(.dark) .cd-nav-links li + li::before { background: rgba(0,0,0,0.12); }
-    :root:not(.dark) .cd-nav-lang { color: rgba(15,23,42,0.55); }
-    :root:not(.dark) .cd-nav-lang:hover { color: #0f172a; }
-    :root:not(.dark) .cd-nav-theme { color: rgba(15,23,42,0.55); }
-    :root:not(.dark) .cd-nav-theme:hover { color: #0f172a; }
+    html.light .cd-nav-links a { color: rgba(15,23,42,0.55); }
+    html.light .cd-nav-links a:hover { color: #0f172a; background: rgba(0,0,0,0.05); }
+    html.light .cd-nav-links a.cd-active { color: #0f172a; background: rgba(0,0,0,0.06); }
+    html.light .cd-nav-links li + li::before { background: rgba(0,0,0,0.12); }
+    html.light .cd-nav-lang { color: rgba(15,23,42,0.55); }
+    html.light .cd-nav-lang:hover { color: #0f172a; }
+    html.light .cd-nav-theme { color: rgba(15,23,42,0.55); }
+    html.light .cd-nav-theme:hover { color: #0f172a; }
     .cd-nav-brand {
       display: flex; align-items: center; gap: 8px;
       text-decoration: none; color: #f8fafc; flex-shrink: 0;
@@ -107,13 +107,13 @@
       border-radius: 6px;
     }
     .cd-dropdown a:hover { color: #f8fafc; background: rgba(255,255,255,0.08); }
-    :root:not(.dark) .cd-dropdown {
+    html.light .cd-dropdown {
       background: rgba(248,250,252,0.97);
       border-color: rgba(0,0,0,0.1);
       box-shadow: 0 8px 32px rgba(0,0,0,0.12);
     }
-    :root:not(.dark) .cd-dropdown a { color: rgba(15,23,42,0.6); }
-    :root:not(.dark) .cd-dropdown a:hover { color: #0f172a; background: rgba(0,0,0,0.05); }
+    html.light .cd-dropdown a { color: rgba(15,23,42,0.6); }
+    html.light .cd-dropdown a:hover { color: #0f172a; background: rgba(0,0,0,0.05); }
     .cd-nav-right { display: flex; align-items: center; gap: 0.25rem; }
     .cd-nav-lang {
       padding: 0.25rem 0.5rem; background: none; border: none; cursor: pointer;
@@ -246,12 +246,12 @@
       ]},
     { label: 'Tecnología', href: './index.html#tecnologia', children: [
         { label: 'Procesos',    en: 'Processes',   href: './index.html#procesos'    },
-        { label: 'Cartográfica',en: 'Cartographic',href: './index.html#cartografica'},
+        { label: 'Cartográfica',en: 'Cartographic',href: './cartografica.html'},
         { label: 'GeoSoftware', en: 'GeoSoftware', href: './index.html#geosoftware' },
       ]},
     { label: 'Cultura',    href: './index.html#cultura',    children: [
         { label: 'Historia', en: 'History', href: './historia.html'        },
-        { label: 'Equipo',   en: 'Team',    href: './index.html#equipo'    },
+        { label: 'Equipo',   en: 'Team',    href: './equipo.html'          },
       ]},
     { label: 'Noticias',   href: './index.html#noticias'    },
     { label: 'X-Ray',      href: './index.html#xray'        },
@@ -259,12 +259,13 @@
 
   /* ── Estado: idioma y tema ── */
   let lang  = localStorage.getItem('cartodata-lang') || 'es';
-  let theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  let theme = localStorage.getItem('theme') || 'dark';
 
   function applyTheme(t) {
     theme = t;
     localStorage.setItem('theme', t);
-    document.documentElement.classList.toggle('dark', t === 'dark');
+    document.documentElement.classList.toggle('light', t === 'light');
+    document.documentElement.classList.toggle('dark',  t === 'dark');
     const btn = document.getElementById('cd-theme-btn');
     if (btn) btn.innerHTML = t === 'dark' ? SVG_SUN : SVG_MOON;
     const logo = document.getElementById('cd-nav-logo');

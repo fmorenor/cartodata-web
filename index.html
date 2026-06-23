@@ -890,6 +890,7 @@
               <p class="cd-team-eyebrow">Nuestro equipo</p>
               <h2 class="cd-team-title">CartoData</h2>
               <p class="cd-team-label" id="cd-team-label">${SLIDES[0].label}</p>
+              <a href="./equipo.html" style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:1rem;font-size:0.82rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#7b9cff;text-decoration:none;">Conoce al equipo →</a>
             </div>
             <div class="cd-team-dots" id="cd-team-dots">
               ${SLIDES.map((_,i) => `
@@ -1121,6 +1122,48 @@
             e.preventDefault();
             e.stopPropagation();
             window.location.assign('./historia.html');
+          }, true);
+        }
+      });
+    }
+    const obs = new MutationObserver(hook);
+    obs.observe(document.body, { childList: true, subtree: true });
+    setTimeout(hook, 2000);
+    setTimeout(hook, 4000);
+  })();
+
+  /* ── Redirigir link Cartográfica del nav a cartografica.html ── */
+  (function hookCartograficaNav() {
+    function hook() {
+      document.querySelectorAll('a[href="#cartografica"], a[href*="/cartografica"]').forEach(a => {
+        if (!a.dataset.cdCartHooked) {
+          a.dataset.cdCartHooked = '1';
+          a.href = './cartografica.html';
+          a.addEventListener('click', e => {
+            e.preventDefault();
+            e.stopPropagation();
+            window.location.assign('./cartografica.html');
+          }, true);
+        }
+      });
+    }
+    const obs = new MutationObserver(hook);
+    obs.observe(document.body, { childList: true, subtree: true });
+    setTimeout(hook, 2000);
+    setTimeout(hook, 4000);
+  })();
+
+  /* ── Redirigir link Equipo del nav a equipo.html ── */
+  (function hookEquipoNav() {
+    function hook() {
+      document.querySelectorAll('a[href="#equipo"], a[href*="/equipo"]').forEach(a => {
+        if (!a.dataset.cdEquHooked) {
+          a.dataset.cdEquHooked = '1';
+          a.href = './equipo.html';
+          a.addEventListener('click', e => {
+            e.preventDefault();
+            e.stopPropagation();
+            window.location.assign('./equipo.html');
           }, true);
         }
       });
@@ -1801,23 +1844,35 @@
   <script>
   /* Reordena el dropdown de Tecnología: Procesos → Cartográfica → GeoSoftware */
   (function reorderTechMenu() {
-    const ORDER = ['#procesos', '#cartografica', '#geosoftware'];
-    let done = false;
-    function reorder() {
-      if (done) return;
-      const links = ORDER.map(h => document.querySelector(`a[href="${h}"]`));
-      if (!links.every(Boolean)) return;
-      const parent = links[0].parentElement;
-      if (!parent) return;
-      ORDER.forEach(h => {
-        const el = parent.querySelector(`a[href="${h}"]`);
-        if (el) parent.appendChild(el);
-      });
-      done = true;
+    const HREFS = [
+      ['#procesos'],
+      ['#cartografica', './cartografica.html'],
+      ['#geosoftware']
+    ];
+    function findLink(hrefs) {
+      for (const h of hrefs) {
+        const el = document.querySelector(`a[href="${h}"]`);
+        if (el) return el;
+      }
+      return null;
     }
-    const obs = new MutationObserver(reorder);
+    let busy = false;
+    function tryReorder() {
+      if (busy) return;
+      const targets = HREFS.map(findLink);
+      if (!targets.every(Boolean)) return;
+      const parent = targets[0].parentElement;
+      if (!parent) return;
+      // Check if already in correct order to avoid unnecessary mutations
+      const children = Array.from(parent.children);
+      const indices = targets.map(el => children.indexOf(el));
+      if (indices[0] < indices[1] && indices[1] < indices[2]) return; // already correct
+      busy = true;
+      targets.forEach(el => parent.appendChild(el));
+      busy = false;
+    }
+    const obs = new MutationObserver(tryReorder);
     obs.observe(document.body, { childList: true, subtree: true });
-    setTimeout(() => { reorder(); obs.disconnect(); }, 4000);
   })();
   </script>
   </body>
