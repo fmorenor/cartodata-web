@@ -55,6 +55,11 @@
     <script type="module" crossorigin src="./assets/index-DnxW7q2B.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-CPcc1KG7.css">
     <style>#xray { display: none !important; }</style>
+    <style>
+      /* Mantener label DATOS siempre al frente en el diagrama de círculos */
+      .venn .circle.datos { z-index: 10 !important; }
+      .venn .circle.datos .circle-label { position: relative; z-index: 11 !important; }
+    </style>
     <style id="cd-step-fix"></style>
   </head>
   <body>
@@ -523,15 +528,50 @@
       if (tableWrap) {
         /* Ampliar el contenedor padre para que ocupe ancho completo */
         let ancestor = tableWrap;
-        for (let i = 0; i < 4; i++) {
-          if (!ancestor.parentElement) break;
-          ancestor = ancestor.parentElement;
+        for (let i = 0; i < 8; i++) {
           const style = window.getComputedStyle(ancestor);
           if (style.maxWidth && parseInt(style.maxWidth) > 0 && parseInt(style.maxWidth) < 900) {
             ancestor.style.maxWidth = 'none';
           }
+          if (style.overflow === 'hidden' || style.overflowX === 'hidden' || style.overflowY === 'hidden') {
+            ancestor.style.overflow = 'visible';
+          }
+          /* Colapsar padding/margin del wrapper rounded-xl */
+          if (ancestor.classList && ancestor.classList.contains('rounded-xl')) {
+            ancestor.style.padding = '0';
+            ancestor.style.margin = '0';
+            ancestor.style.border = 'none';
+            ancestor.style.borderRadius = '0';
+            ancestor.style.background = 'transparent';
+          }
+          if (!ancestor.parentElement) break;
+          ancestor = ancestor.parentElement;
         }
         injectHTML(tableWrap);
+
+        /* Insertar separador aviones FUERA del rounded-xl, como hermano */
+        const roundedBox = tableWrap.closest('.rounded-xl') || tableWrap;
+        if (!document.querySelector('.cd-aviones-separator')) {
+          const sep = document.createElement('div');
+          sep.className = 'cd-aviones-separator';
+          sep.innerHTML = `<img src="./images/aviones.avif" alt="Flota CartoData" loading="lazy">`;
+          roundedBox.insertAdjacentElement('afterend', sep);
+
+          /* Inyectar estilos una sola vez */
+          const st = document.createElement('style');
+          st.textContent = `
+            .cd-aviones-separator {
+              width: 100vw; height: 100vh;
+              position: relative; left: 50%; transform: translateX(-50%);
+              overflow: hidden; display: block;
+            }
+            .cd-aviones-separator img {
+              position: absolute; inset: 0; width: 100%; height: 100%;
+              object-fit: cover; display: block;
+            }
+          `;
+          document.head.appendChild(st);
+        }
       }
       return true;
     }
@@ -550,10 +590,10 @@
     const CASES = [
       {
         tab:    'Ente Normativo',
-        title:  'El Salvador Maps',
-        copy:   'Un país entero sin cartografía moderna. El gobierno de El Salvador necesitaba mapear sus 20,742 km² para que sus instituciones pudieran tomar decisiones con información real y compartida.',
-        result: 'Hoy El Salvador está en Google Maps. Y sus instituciones comparten información geográfica en tiempo real.',
-        media:  'B-40F0BGieM',
+        title:  'El Salvador NIX',
+        copy:   'NIX es una plataforma de inteligencia geoespacial desarrollada por la Oficina de Planificación del Área Metropolitana de San Salvador (OPAMSS) diseñada para el desarrollo urbano. Se complementa con El Salvador Maps, el portal del Centro Nacional de Registros (CNR) para cartografía, imágenes oblicuas y vistas panorámicas.',
+        result: 'Hoy El Salvador cuenta con infraestructura geoespacial de clase mundial al servicio del desarrollo urbano y la planificación territorial.',
+        media:  'XwLL0j4woHc',
         type:   'youtube',
       },
       {
@@ -1152,6 +1192,22 @@
     setTimeout(() => { hookLink(); }, 4000);
   })();
 
+  /* ── Destacar X-Ray en el nav con blanco y bold ── */
+  (function styleXRayNav() {
+    function applyStyle() {
+      document.querySelectorAll('nav a, header a').forEach(a => {
+        if (a.textContent.trim() === 'X-Ray' && !a.dataset.cdXrayStyled) {
+          a.dataset.cdXrayStyled = '1';
+          a.style.cssText += 'color:#ffffff !important; font-weight:700 !important;';
+        }
+      });
+    }
+    const obs = new MutationObserver(applyStyle);
+    obs.observe(document.body, { childList: true, subtree: true });
+    setTimeout(applyStyle, 500);
+    setTimeout(applyStyle, 2000);
+  })();
+
   /* ── Redirigir link Historia del nav a historia.html ── */
   (function hookHistoriaNav() {
     function hook() {
@@ -1624,7 +1680,7 @@
         img:   './images/herr-procesos.jpg',
         title: 'Procesos diseñados para la precisión territorial',
         body:  'Estructuramos flujos de trabajo geoespaciales que transforman datos complejos en decisiones claras. Cada proceso está diseñado para reducir tiempos, eliminar errores y generar resultados reproducibles a cualquier escala.',
-        tags:  ['Metodología GIS', 'Análisis territorial', 'Flujos estructurados'],
+        tags:  ['Diagnóstico geoespacial', 'Re-ingeniería de procesos', 'Análisis especializados'],
       },
       {
         key:   'datos',
@@ -1632,7 +1688,7 @@
         img:   './images/herr-datos.jpg',
         title: 'Datos geoespaciales con la más alta resolución',
         body:  'Integramos fuentes propias, satelitales y de campo para construir bases de datos georreferenciadas robustas. Información actualizada, validada y lista para análisis avanzados o visualización en tiempo real.',
-        tags:  ['Imágenes satelitales', 'Levantamiento de campo', 'Bases georef'],
+        tags:  ['LiDAR', 'OBLiX', 'Visión 360'],
       },
       {
         key:   'software',
@@ -1640,7 +1696,7 @@
         img:   './images/herr-software.jpg',
         title: 'Plataformas propias para cada reto geoespacial',
         body:  'eCarto y nuestras herramientas propias permiten consultar, analizar y gestionar información geográfica desde cualquier dispositivo. Sin licencias de terceros, sin limitaciones: tecnología hecha a la medida de cada proyecto.',
-        tags:  ['eCarto Platform', 'Web GIS', 'Sin límites de usuario'],
+        tags:  ['eCarto', 'AU4', 'Midas'],
       },
     ];
     const DURATION = 6000;

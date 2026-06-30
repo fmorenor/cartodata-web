@@ -74,6 +74,8 @@
     }
     .cd-nav-links a:hover { color: #f8fafc; background: rgba(255,255,255,0.07); }
     .cd-nav-links a.cd-active { color: #f8fafc; background: rgba(255,255,255,0.08); }
+    .cd-nav-links a.cd-nav-xray { color: #ffffff; font-weight: 700; }
+    .cd-nav-links a.cd-nav-xray:hover { color: #ffffff; }
     /* Dropdown */
     .cd-nav-links li { position: relative; }
     .cd-nav-links .cd-has-dropdown > a { gap: 4px; }
@@ -400,7 +402,7 @@
     <ul class="cd-nav-links">
       ${NAV_LINKS.map(l => `
         <li class="${l.children ? 'cd-has-dropdown' : ''}">
-          <a href="${l.href}" ${isActive(l.href) ? 'class="cd-active"' : ''}>${l.label}</a>
+          <a href="${l.href}" class="${[isActive(l.href) ? 'cd-active' : '', l.label === 'X-Ray' ? 'cd-nav-xray' : ''].filter(Boolean).join(' ')}">${l.label}</a>
           ${l.children ? `
           <div class="cd-dropdown">
             ${l.children.map(c => `<a href="${c.href}">${c.label}</a>`).join('')}

@@ -96,6 +96,13 @@
     }
     .carousel-eyebrow span { display: inline-block; width: 24px; height: 1.5px; background: currentColor; }
     .slide-lidar .carousel-eyebrow { color: #7b9cff; }
+    .slide-lidar .carousel-overlay {
+      background: linear-gradient(to top,
+        rgba(5,8,22,0.96) 0%,
+        rgba(5,8,22,0.70) 35%,
+        rgba(5,8,22,0.40) 60%,
+        rgba(5,8,22,0.50) 100%);
+    }
     .slide-oblix .carousel-eyebrow { color: #5ecfb1; }
     .slide-v360  .carousel-eyebrow { color: #b57bff; }
 
@@ -301,6 +308,92 @@
     }
     .cta-btn:hover { background: var(--blue-dark); transform: translateY(-2px); }
 
+    /* ── ¿Qué es OBLIX? sección fondo claro ── */
+    .oblix-what-section {
+      background: #f4f4f2;
+      padding: clamp(4rem,8vw,7rem) clamp(1.5rem,6vw,5rem);
+    }
+    .oblix-what-inner {
+      max-width: 1280px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center;
+    }
+    .oblix-what-eyebrow {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: #5ecfb1; margin-bottom: 0.5rem;
+    }
+    .oblix-what-headline {
+      font-family: var(--font-heading); font-weight: 100;
+      font-size: clamp(2.5rem,5vw,4rem); line-height: 1.05;
+      letter-spacing: -0.02em; color: #0f172a;
+      margin-bottom: 2rem;
+    }
+    .oblix-what-sub {
+      font-family: var(--font-heading); font-weight: 300;
+      font-size: 1.25rem; color: #0f172a;
+      margin-bottom: 1rem; letter-spacing: -0.01em;
+    }
+    .oblix-what-p {
+      font-size: 0.95rem; color: #475569; line-height: 1.75;
+      margin-bottom: 0.9rem;
+    }
+    .oblix-what-diagram img {
+      width: 100%; max-width: 520px; display: block; margin: 0 auto;
+    }
+    @media (max-width: 768px) {
+      .oblix-what-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .oblix-what-diagram { order: -1; }
+    }
+
+    /* ── OBLIX gallery strip ── */
+    .oblix-gallery {
+      display: grid;
+      grid-template-columns: repeat(9, 1fr);
+      height: 280px;
+      overflow: hidden;
+    }
+    .oblix-gallery-item {
+      overflow: hidden; cursor: pointer;
+    }
+    .oblix-gallery-item img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      filter: grayscale(100%) brightness(0.85);
+      transition: filter 400ms ease, transform 400ms ease;
+    }
+    .oblix-gallery-item:hover img {
+      filter: grayscale(0%) brightness(1);
+      transform: scale(1.06);
+    }
+    @media (max-width: 768px) {
+      .oblix-gallery { grid-template-columns: repeat(3, 1fr); height: 360px; }
+    }
+
+    /* ── LiDAR video fullscreen ── */
+    .lidar-video-wrap {
+      position: relative; width: 100%; height: 100vh;
+      overflow: hidden; background: #000;
+    }
+    .lidar-video-wrap .lidar-video-overlay {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background: linear-gradient(180deg,
+        rgba(5,8,22,0.35) 0%,
+        rgba(5,8,22,0.0)  30%,
+        rgba(5,8,22,0.0)  70%,
+        rgba(5,8,22,0.5)  100%);
+    }
+    #lidar-yt-player {
+      position: absolute; inset: 0;
+    }
+    #lidar-yt-player iframe {
+      position: absolute !important;
+      top: 50% !important; left: 50% !important;
+      width: 177.78vh !important;
+      height: 56.25vw !important;
+      min-width: 100% !important; min-height: 100% !important;
+      transform: translate(-50%, -50%) !important;
+      border: none !important; pointer-events: none !important;
+    }
+
     /* ── OBLIX parallax hero ── */
     .oblix-parallax {
       position: relative; overflow: hidden;
@@ -341,6 +434,78 @@
       .oblix-parallax-content { grid-template-columns: 1fr; }
     }
 
+    /* ── Visión 360 contenido ── */
+    .v360-what-section {
+      background: #f4f4f2;
+      padding: clamp(4rem,8vw,7rem) 0 0;
+    }
+    .v360-what-inner {
+      max-width: 1280px; margin: 0 auto;
+      padding: 0 clamp(1.5rem,6vw,5rem);
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center;
+    }
+    .v360-what-eyebrow {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: #b57bff; margin-bottom: 1.25rem;
+    }
+    .v360-what-p {
+      font-size: 0.95rem; color: #475569; line-height: 1.75; margin-bottom: 0.9rem;
+    }
+    .v360-what-p strong { color: #0f172a; }
+    .v360-feat-list { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.9rem; }
+    .v360-feat { border-left: 2px solid #b57bff; padding-left: 1rem; }
+    .v360-feat-label { display: block; font-size: 0.8rem; font-weight: 600; color: #0f172a; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.2rem; }
+    .v360-feat-desc { font-size: 0.88rem; color: #64748b; }
+    .v360-what-diagram img { width: 100%; display: block; }
+    .v360-img-full {
+      margin-top: 3rem;
+      overflow: hidden;
+    }
+    .v360-img-full img { width: 100%; display: block; object-fit: cover; max-height: 320px; }
+    .v360-multiplatform {
+      max-width: 1280px; margin: 0 auto;
+      padding: 3rem clamp(1.5rem,6vw,5rem) 4rem;
+      text-align: center;
+    }
+    .v360-multiplatform img { max-width: 700px; width: 100%; display: block; margin: 0 auto; }
+    @media (max-width: 768px) {
+      .v360-what-inner { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    /* ── Visión 360 parallax hero ── */
+    .v360-parallax {
+      position: relative; width: 100%; min-height: 100vh;
+      display: flex; align-items: center; overflow: hidden;
+    }
+    .v360-parallax-bg {
+      position: absolute; inset: -15% 0;
+      background-image: url('./images/cartodata_vision_360_header.jpg');
+      background-size: cover; background-position: center;
+      will-change: transform;
+    }
+    .v360-parallax-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg,
+        rgba(5,8,22,0.88) 0%,
+        rgba(5,8,22,0.55) 50%,
+        rgba(5,8,22,0.30) 100%);
+    }
+    html.light .v360-parallax-overlay {
+      background: linear-gradient(135deg,
+        rgba(5,8,22,0.75) 0%,
+        rgba(5,8,22,0.45) 100%);
+    }
+    .v360-parallax-content {
+      position: relative; z-index: 2;
+      max-width: 1280px; margin: 0 auto; width: 100%;
+      padding: clamp(4rem,8vw,7rem) clamp(1.5rem,6vw,5rem);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    }
+    @media (max-width: 768px) {
+      .v360-parallax-content { grid-template-columns: 1fr; }
+    }
+
     /* Visión 360 image — adapts to dark/light mode */
     .img-v360 {
       filter: none;
@@ -368,12 +533,12 @@
 
     <!-- Slide 1: LiDAR -->
     <div class="carousel-slide active slide-lidar">
-      <img src="./images/herr-procesos.jpg" alt="LiDAR 3D" />
+      <img src="./images/lidar-hero.jpg" alt="LiDAR 3D nube de puntos" />
       <div class="carousel-overlay"></div>
       <div class="carousel-content">
-        <span class="carousel-eyebrow"><span></span>LiDAR · Nube de puntos 3D</span>
-        <h1 class="carousel-title">Descubre los<br>detalles <strong>ocultos</strong><br>en el territorio.</h1>
-        <p class="carousel-subtitle">Hasta 400,000 puntos por segundo. Modelos 3D del terreno con precisión centimétrica, desde el aire.</p>
+        <span class="carousel-eyebrow"><span></span>Discover the details hidden to photography.</span>
+        <h1 class="carousel-title"><strong>LiDAR</strong></h1>
+        <p class="carousel-subtitle">Aerial 3d laser scanning</p>
         <a href="#lidar" class="carousel-cta">Ver tecnología →</a>
       </div>
     </div>
@@ -475,6 +640,12 @@
     </div>
   </section>
 
+  <!-- ── LiDAR Video fullscreen ── -->
+  <div class="lidar-video-wrap" id="lidar-video-section">
+    <div class="lidar-video-overlay"></div>
+    <div id="lidar-yt-player"></div>
+  </div>
+
   <!-- ══════════════════════════════
        SECCIÓN 2: OBLIX
   ══════════════════════════════ -->
@@ -513,6 +684,22 @@
             <span class="spec-label">Integración</span>
             <span class="spec-value">AU4 (estación fotogramétrica) + eCarto (visor web)</span>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── ¿Qué es OBLIX? sección fondo claro ── -->
+    <div class="oblix-what-section">
+      <div class="oblix-what-inner">
+        <div class="oblix-what-text">
+          <p class="oblix-what-eyebrow">Fotografía aérea oblicua</p>
+          <h2 class="oblix-what-headline">¿Qué es<br>Oblix?</h2>
+          <p class="oblix-what-p">Oblix es una solución que integra toma fotográfica, procesamiento y la disponibilización de fotografías oblicuas para los fines de su organización.</p>
+          <p class="oblix-what-p">Oblix se compone de un arreglo de 5 cámaras de 80mpx, 4 orientadas a 45° del horizonte y otra apuntando hacia abajo que adquieren 400mpx de información por toma.</p>
+          <p class="oblix-what-p">Estas vistas laterales permiten la medición de alturas, distancias, superficies y otros elementos invisibles a la toma vertical.</p>
+        </div>
+        <div class="oblix-what-diagram">
+          <img src="./images/oblix_vistas.png" alt="Diagrama 4 vistas oblicuas OBLIX" />
         </div>
       </div>
     </div>
@@ -556,31 +743,90 @@
     </div>
   </section>
 
+  <!-- ── OBLIX Gallery Strip ── -->
+  <div class="oblix-gallery">
+    <div class="oblix-gallery-item"><img src="./images/oblix_gal_1.jpg" alt="" /></div>
+    <div class="oblix-gallery-item"><img src="./images/oblix_gal_2.jpg" alt="" /></div>
+    <div class="oblix-gallery-item"><img src="./images/oblix_gal_3.jpg" alt="" /></div>
+    <div class="oblix-gallery-item"><img src="./images/oblix_gal_4.jpg" alt="" /></div>
+    <div class="oblix-gallery-item"><img src="./images/oblix_gal_5.jpg" alt="" /></div>
+    <div class="oblix-gallery-item"><img src="./images/oblix_gal_6.jpg" alt="" /></div>
+    <div class="oblix-gallery-item"><img src="./images/oblix_gal_7.jpg" alt="" /></div>
+    <div class="oblix-gallery-item"><img src="./images/oblix_gal_8.jpg" alt="" /></div>
+    <div class="oblix-gallery-item"><img src="./images/oblix_gal_9.jpg" alt="" /></div>
+  </div>
+
   <!-- ══════════════════════════════
        SECCIÓN 3: Visión 360
   ══════════════════════════════ -->
-  <section class="tech-section" id="vision360">
-    <div class="page-inner">
+  <section class="tech-section" id="vision360" style="padding:0; border-bottom: 1px solid var(--border);">
 
-      <span class="section-eyebrow eyebrow-v360">Cartografía Terrestre</span>
-
-      <div class="tech-header">
+    <!-- Parallax hero V360 -->
+    <div class="v360-parallax">
+      <div class="v360-parallax-bg" id="v360-bg"></div>
+      <div class="v360-parallax-overlay"></div>
+      <div class="v360-parallax-content">
         <div>
-          <div class="tech-badge badge-v360">Visión 360® · Panorámica Georreferenciada</div>
-          <h2 class="tech-title">Cada calle,<br>cada fachada,<br><strong>georeferenciada.</strong></h2>
-          <p class="tech-tagline">Visión 360® es una solución de imagen y visualización en 360° que genera panorámicas fotográficas georreferenciadas a pie de calle, desarrollada por CartoData e integrada con el visor eCarto.</p>
-          <ul class="feat-list feats-v360">
-            <li>Metadata georreferenciada en cada toma</li>
-            <li>Alta resolución con sistema GPS/IMU de navegación</li>
-            <li>Interfaz web multi-plataforma (móvil y escritorio)</li>
-            <li>Compatible con QGIS y ArcGIS vía eCarto</li>
-            <li>Define zonas y frecuencias de captura a la medida</li>
-          </ul>
+          <span class="section-eyebrow eyebrow-v360" style="margin-bottom:1.4rem;">Cartografía Terrestre</span>
+          <div class="tech-badge badge-v360" style="margin-bottom:1.4rem;">Visión 360® · Panorámica Georreferenciada</div>
+          <h2 class="tech-title" style="margin-bottom:0.5rem;">Visión 360®</h2>
+          <h3 class="tech-title" style="font-size:clamp(1.4rem,3vw,2.2rem);font-weight:300;margin-bottom:1rem;">Cada calle,<br>cada fachada,<br><strong>georeferenciada.</strong></h3>
+          <p class="tech-tagline" style="margin-top:1rem;">Visión 360® genera panorámicas fotográficas georreferenciadas a pie de calle, desarrollada por CartoData e integrada con el visor eCarto.</p>
         </div>
-        <div class="tech-image tech-image-v360">
-          <img src="./images/v360.jpg" alt="Visión 360 panorámica" class="img-v360" />
+        <div class="spec-block" style="background:rgba(5,8,22,0.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);">
+          <div class="spec-item">
+            <span class="spec-label">Metadata en cada toma</span>
+            <span class="spec-value">GPS/IMU georreferenciado</span>
+          </div>
+          <div class="spec-divider"></div>
+          <div class="spec-item">
+            <span class="spec-label">Interfaz web</span>
+            <span class="spec-value">Multi-plataforma · móvil y escritorio</span>
+          </div>
+          <div class="spec-divider"></div>
+          <div class="spec-item">
+            <span class="spec-label">Integración</span>
+            <span class="spec-value">QGIS, ArcGIS y eCarto</span>
+          </div>
+          <div class="spec-divider"></div>
+          <div class="spec-item">
+            <span class="spec-label">Captura</span>
+            <span class="spec-value">Zonas y frecuencias a la medida</span>
+          </div>
         </div>
       </div>
+    </div>
+
+    <!-- ── ¿Qué es Visión 360? sección fondo claro ── -->
+    <div class="v360-what-section">
+      <div class="v360-what-inner">
+        <div class="v360-what-text">
+          <p class="v360-what-eyebrow">Características</p>
+          <p class="v360-what-p"><strong>Visión360®</strong> es una solución de toma de imágenes y visualización del terreno en 360°, generando panoramas fotográficos georreferenciados a nivel de calle. Desarrollado por CartoData y de fácil visualización a través del visor geográfico eCarto.</p>
+          <p class="v360-what-p">Visión360® combina cámaras montadas en una torre con avanzados sistemas de navegación (GPS/IMU) adquiriendo panoramas de alta definición en cada toma.</p>
+          <div class="v360-feat-list">
+            <div class="v360-feat"><span class="v360-feat-label">Alta resolución</span><span class="v360-feat-desc">Imágenes de alta definición con detalle a nivel de número de calle.</span></div>
+            <div class="v360-feat"><span class="v360-feat-label">Metadatos de cada toma</span><span class="v360-feat-desc">LAT / LONG / ELEV georreferenciados en cada panorama.</span></div>
+            <div class="v360-feat"><span class="v360-feat-label">Interfaz web multiplataforma HTML5</span><span class="v360-feat-desc">Acceso desde cualquier dispositivo, sin instalar software.</span></div>
+          </div>
+        </div>
+        <div class="v360-what-diagram">
+          <img src="./images/v360.jpg" alt="Diagrama Visión 360" />
+        </div>
+      </div>
+
+      <!-- Imagen resolución full width -->
+      <div class="v360-img-full">
+        <img src="./images/v360_resolucion.png" alt="Alta resolución Visión 360 — número de calle visible" />
+      </div>
+
+      <!-- Multiplataforma -->
+      <div class="v360-multiplatform">
+        <img src="./images/v360_multiplataforma.png" alt="Visión 360 interfaz web multiplataforma" />
+      </div>
+    </div>
+
+    <div class="page-inner">
 
       <p class="usecases-title">¿Por qué necesito Visión 360?</p>
       <div class="usecases-grid">
@@ -631,6 +877,19 @@
   </div>
 
   <script>
+    // Parallax V360
+    (function () {
+      const bg = document.getElementById('v360-bg');
+      if (!bg) return;
+      function onScroll() {
+        const rect = bg.parentElement.getBoundingClientRect();
+        const progress = -rect.top / (rect.height + window.innerHeight);
+        bg.style.transform = `translateY(${progress * 30}%)`;
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+
     // Parallax OBLIX
     (function () {
       const bg = document.getElementById('oblix-bg');
@@ -671,6 +930,51 @@
       }));
 
       timer = setInterval(next, 6000);
+    })();
+  </script>
+
+  <!-- YouTube IFrame API + LiDAR video autoplay/pause on viewport -->
+  <script>
+    (function () {
+      var player;
+      var ready = false;
+
+      window.onYouTubeIframeAPIReady = function () {
+        player = new YT.Player('lidar-yt-player', {
+          videoId: 'mdEkLtMB3d8',
+          playerVars: {
+            autoplay: 0, mute: 1, controls: 0, loop: 1,
+            playlist: 'mdEkLtMB3d8',
+            modestbranding: 1, rel: 0, showinfo: 0
+          },
+          events: {
+            onReady: function (e) {
+              ready = true;
+              player.mute();
+              var iframe = e.target.getIframe();
+              iframe.style.cssText = 'position:absolute;top:50%;left:50%;width:177.78vh;height:56.25vw;min-width:100%;min-height:100%;transform:translate(-50%,-50%);border:none;pointer-events:none;';
+            }
+          }
+        });
+      };
+
+      var tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      document.head.appendChild(tag);
+
+      var section = document.getElementById('lidar-video-section');
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!ready) return;
+          if (entry.isIntersecting) {
+            player.playVideo();
+          } else {
+            player.pauseVideo();
+          }
+        });
+      }, { threshold: 0.25 });
+
+      if (section) observer.observe(section);
     })();
   </script>
 
