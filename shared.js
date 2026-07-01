@@ -329,7 +329,7 @@
     { label: 'Impacto',    href: './index.html#impacto',    children: [
         { label: 'Ciudades',       en: 'Cities',        href: './ciudades.html'             },
         { label: 'Infraestructura',en: 'Infrastructure',href: './infraestructura.html'       },
-        { label: 'Minería',        en: 'Mining',        href: './index.html#minas'          },
+        { label: 'Minería',        en: 'Mining',        href: './mineria.html'              },
         { label: 'Instituciones',  en: 'Institutions',  href: './instituciones.html'        },
       ]},
     { label: 'Tecnología', href: './index.html#tecnologia', children: [

@@ -1257,6 +1257,30 @@
   })();
 
   /* ── Redirigir tarjeta Instituciones a instituciones.html ── */
+  (function hookMineriaNav() {
+    function hook() {
+      document.querySelectorAll('a, button').forEach(el => {
+        if (el.dataset.cdMinHooked) return;
+        const h3 = el.querySelector('h3');
+        const match = h3 && h3.textContent.trim() === 'Minería';
+        const directMatch = el.textContent.trim() === 'Minería';
+        if (match || directMatch) {
+          el.dataset.cdMinHooked = '1';
+          el.addEventListener('click', e => {
+            e.preventDefault();
+            e.stopPropagation();
+            window.location.assign('./mineria.html');
+          }, true);
+        }
+      });
+    }
+    const obs = new MutationObserver(hook);
+    obs.observe(document.body, { childList: true, subtree: true });
+    setTimeout(hook, 500);
+    setTimeout(hook, 2000);
+    setTimeout(hook, 4000);
+  })();
+
   (function hookInstitucionesNav() {
     function hook() {
       document.querySelectorAll('a, button').forEach(el => {

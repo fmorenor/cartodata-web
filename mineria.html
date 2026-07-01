@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minería · Geointeligencia para la industria extractiva — CartoData</title>
+  <meta name="description" content="Soluciones geoespaciales para la industria minera: impacto ambiental, cálculo de volúmenes, topografía, LiDAR y reportes." />
+  <link rel="canonical" href="https://www.cartodata.com/mineria.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.cartodata.com/mineria.html" />
+  <meta property="og:title" content="Minería — CartoData" />
+  <meta property="og:description" content="Geointeligencia para la industria extractiva. Impacto ambiental, cálculo de volúmenes, LiDAR y más." />
+  <meta property="og:locale" content="es_MX" />
+  <meta property="og:site_name" content="CartoData" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <script src="./shared.js" defer></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body { background: #050816; color: #f8fafc; font-family: 'DM Sans', system-ui, sans-serif; }
+    img { display: block; max-width: 100%; }
+
+    /* ── HERO VIDEO ── */
+    .hero {
+      position: relative; width: 100%; min-height: 100vh;
+      display: flex; align-items: center; overflow: hidden;
+    }
+    .hero-video {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to top,  rgba(5,8,22,0.97) 0%, rgba(5,8,22,0.50) 40%, rgba(5,8,22,0.25) 100%),
+        linear-gradient(to right, rgba(5,8,22,0.85) 0%, rgba(5,8,22,0.30) 60%, rgba(5,8,22,0.0) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 860px;
+      padding: clamp(7rem,14vw,11rem) clamp(1.5rem,6vw,4rem) clamp(5rem,9vw,7rem);
+    }
+    .hero-eyebrow {
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 1.2rem;
+    }
+    .hero-h1 {
+      font-size: clamp(2.4rem,5.5vw,4.5rem); font-weight: 200; line-height: 1.1;
+      color: #fff; margin-bottom: 0.6rem;
+    }
+    .hero-h1 strong { font-weight: 800; display: block; }
+    .hero-sub {
+      font-size: clamp(1rem,1.6vw,1.15rem); font-weight: 300; line-height: 1.7;
+      color: rgba(255,255,255,0.65); max-width: 560px; margin: 1.2rem 0 2.5rem;
+    }
+    .hero-pills { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2.5rem; }
+    .hero-pill {
+      padding: 0.4rem 1rem; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.2);
+      font-size: 0.8rem; color: rgba(255,255,255,0.75); font-weight: 500;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-block; padding: 1rem 2.4rem;
+      background: #3b5bdb; color: #fff; border-radius: 999px;
+      font-size: 0.95rem; font-weight: 600; text-decoration: none;
+      transition: background 250ms, transform 200ms;
+    }
+    .btn-primary:hover { background: #2d4bbd; transform: translateY(-2px); }
+    .btn-ghost {
+      display: inline-block; padding: 1rem 2.4rem;
+      background: transparent; color: #fff; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.3);
+      font-size: 0.95rem; font-weight: 500; text-decoration: none;
+      transition: background 250ms, border-color 250ms;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.6); }
+
+    /* ── INTRO ── */
+    .intro-section {
+      background: #0b1022;
+      padding: clamp(4rem,8vw,7rem) clamp(1.5rem,6vw,4rem);
+    }
+    .intro-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+    }
+    .intro-eyebrow {
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.16em;
+      text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 0.8rem;
+    }
+    .intro-h2 {
+      font-size: clamp(1.6rem,3vw,2.6rem); font-weight: 300; color: #fff;
+      line-height: 1.2; margin-bottom: 1.5rem;
+    }
+    .intro-h2 strong { font-weight: 800; }
+    .intro-p {
+      font-size: 0.97rem; line-height: 1.8; color: rgba(255,255,255,0.62);
+      margin-bottom: 1rem;
+    }
+    .intro-img-placeholder {
+      background: rgba(255,255,255,0.04);
+      border: 2px dashed rgba(255,255,255,0.12);
+      border-radius: 16px; aspect-ratio: 4/3;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 0.8rem;
+      color: rgba(255,255,255,0.2); font-size: 0.8rem; text-align: center;
+    }
+    .intro-img-placeholder svg { opacity: 0.2; }
+
+    /* ── SERVICIOS (secciones alternas) ── */
+    .servicio-section {
+      padding: clamp(5rem,9vw,8rem) clamp(1.5rem,6vw,4rem);
+    }
+    .servicio-section:nth-child(even) { background: #0b1022; }
+    .servicio-section:nth-child(odd)  { background: #050816; }
+    .servicio-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+    }
+    .servicio-inner.reverse { direction: rtl; }
+    .servicio-inner.reverse > * { direction: ltr; }
+    .servicio-num {
+      font-size: 5rem; font-weight: 900; line-height: 1;
+      color: rgba(59,91,219,0.12); margin-bottom: -1rem; display: block;
+    }
+    .servicio-eyebrow {
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.16em;
+      text-transform: uppercase; color: #3b5bdb; margin-bottom: 0.6rem;
+    }
+    .servicio-h3 {
+      font-size: clamp(1.5rem,2.8vw,2.2rem); font-weight: 300; color: #fff;
+      line-height: 1.2; margin-bottom: 1.2rem;
+    }
+    .servicio-h3 strong { font-weight: 800; }
+    .servicio-p {
+      font-size: 0.97rem; line-height: 1.8; color: rgba(255,255,255,0.62);
+      margin-bottom: 1rem;
+    }
+    .servicio-bullets {
+      margin: 1.2rem 0; padding: 0; list-style: none;
+      display: flex; flex-direction: column; gap: 0.6rem;
+    }
+    .servicio-bullets li {
+      font-size: 0.88rem; color: rgba(255,255,255,0.65);
+      display: flex; align-items: flex-start; gap: 0.7rem;
+    }
+    .servicio-bullets li::before {
+      content: '→'; color: #3b5bdb; font-weight: 700; flex-shrink: 0; margin-top: 0.05rem;
+    }
+
+    /* ── PLACEHOLDER DE IMAGEN ── */
+    .img-placeholder {
+      background: rgba(255,255,255,0.03);
+      border: 2px dashed rgba(255,255,255,0.10);
+      border-radius: 16px; aspect-ratio: 4/3;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 0.8rem;
+      color: rgba(255,255,255,0.18); font-size: 0.78rem; text-align: center;
+      padding: 2rem;
+    }
+    .img-placeholder-icon { font-size: 2.5rem; opacity: 0.3; }
+    .img-placeholder-label { font-weight: 600; letter-spacing: 0.05em; }
+    .img-placeholder-hint { font-size: 0.72rem; opacity: 0.7; }
+
+    /* ── LiDAR - sección especial con imagen real ── */
+    .lidar-img {
+      border-radius: 16px; overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+    .lidar-img img { width: 100%; height: auto; display: block; }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: #3b5bdb;
+      padding: clamp(4rem,8vw,6rem) clamp(1.5rem,6vw,4rem);
+      text-align: center;
+    }
+    .cta-inner { max-width: 700px; margin: 0 auto; }
+    .cta-inner h2 {
+      font-size: clamp(1.6rem,3vw,2.4rem); font-weight: 700; color: #fff;
+      margin-bottom: 1rem; line-height: 1.2;
+    }
+    .cta-inner p {
+      font-size: 1rem; color: rgba(255,255,255,0.78); margin-bottom: 2.2rem; line-height: 1.65;
+    }
+    .btn-white {
+      display: inline-block; padding: 1rem 2.8rem;
+      background: #fff; color: #3b5bdb; border-radius: 999px;
+      font-size: 0.95rem; font-weight: 700; text-decoration: none;
+      transition: background 200ms, transform 200ms;
+    }
+    .btn-white:hover { background: #f0f4ff; transform: translateY(-2px); }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:900px) {
+      .intro-inner,
+      .servicio-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .servicio-inner.reverse { direction: ltr; }
+      .servicio-num { font-size: 3.5rem; }
+    }
+    @media(max-width:600px) {
+      .hero-pills { display: none; }
+      .hero-btns { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── HERO con VIDEO ── -->
+  <section class="hero" id="top">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto"
+           poster="./images/mineras-1.jpg">
+      <source src="./images/mineria-video.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Minería · Industria extractiva</p>
+      <h1 class="hero-h1">Geointeligencia para <strong>la minería</strong></h1>
+      <p class="hero-sub">Precisión geoespacial en cada etapa de la operación minera. Desde el levantamiento topográfico hasta los reportes de impacto ambiental, respaldados por tecnología LiDAR y drones.</p>
+      <div class="hero-pills">
+        <span class="hero-pill">Impacto ambiental</span>
+        <span class="hero-pill">Cálculo de volúmenes</span>
+        <span class="hero-pill">Topografía</span>
+        <span class="hero-pill">LiDAR</span>
+        <span class="hero-pill">Reportes</span>
+      </div>
+      <div class="hero-btns">
+        <a href="#cta" class="btn-primary">Conecta con nuestros expertos →</a>
+        <a href="#impacto-ambiental" class="btn-ghost">Explorar servicios</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── INTRO ── -->
+  <section class="intro-section">
+    <div class="intro-inner">
+      <div>
+        <p class="intro-eyebrow">CartoData · Minería</p>
+        <h2 class="intro-h2">Datos geoespaciales que <strong>protegen y optimizan</strong> tu operación</h2>
+        <p class="intro-p">La industria minera enfrenta exigencias regulatorias crecientes, condiciones de terreno complejas y la necesidad de tomar decisiones con información precisa en tiempo real. CartoData integra tecnologías de captura avanzadas —drones, LiDAR y fotogrametría— con plataformas de análisis geoespacial para entregar datos accionables en cada etapa del proyecto.</p>
+        <p class="intro-p">Desde la evaluación de impacto ambiental antes del inicio de operaciones, hasta los reportes de avance de extracción, nuestros procesos están diseñados para cumplir con los estándares más exigentes de la industria.</p>
+      </div>
+      <div class="intro-img-placeholder">
+        <div class="img-placeholder-icon">🏔️</div>
+        <span class="img-placeholder-label">Imagen de panorama minero</span>
+        <span class="img-placeholder-hint">Fotografía aérea / drone de tajo abierto o zona de operaciones</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 1. IMPACTO AMBIENTAL ── -->
+  <section class="servicio-section" id="impacto-ambiental">
+    <div class="servicio-inner">
+      <div>
+        <span class="servicio-num">01</span>
+        <p class="servicio-eyebrow">Impacto Ambiental</p>
+        <h3 class="servicio-h3">Evaluación y monitoreo <strong>de impacto ambiental</strong></h3>
+        <p class="servicio-p">Generamos la línea base ambiental y el seguimiento continuo de las áreas de influencia del proyecto minero. Nuestros levantamientos geoespaciales permiten detectar cambios en cobertura vegetal, cuerpos de agua y suelos con precisión centimétrica.</p>
+        <p class="servicio-p">Los datos capturados con drones y sensores multiespectrales se integran a plataformas de análisis que producen reportes listos para entrega a las autoridades regulatorias.</p>
+        <ul class="servicio-bullets">
+          <li>Línea base ambiental georreferenciada</li>
+          <li>Monitoreo de cobertura vegetal con índices NDVI</li>
+          <li>Detección de cambios en cuerpos de agua y suelos</li>
+          <li>Reportes para MIA (Manifestación de Impacto Ambiental)</li>
+          <li>Mapas de riesgo y zonas de amortiguamiento</li>
+        </ul>
+      </div>
+      <div class="img-placeholder">
+        <div class="img-placeholder-icon">🌿</div>
+        <span class="img-placeholder-label">Impacto Ambiental</span>
+        <span class="img-placeholder-hint">Imagen multiespectral / comparativo de cobertura vegetal antes y después</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 2. CÁLCULO DE VOLÚMENES ── -->
+  <section class="servicio-section" id="calculo-volumenes">
+    <div class="servicio-inner reverse">
+      <div>
+        <span class="servicio-num">02</span>
+        <p class="servicio-eyebrow">Cálculo de Volúmenes</p>
+        <h3 class="servicio-h3">Medición precisa de <strong>movimiento de tierras</strong></h3>
+        <p class="servicio-p">Calculamos con precisión submétrica el volumen de material extraído, acopiado o depositado en cada ciclo de operación. Reemplazamos los métodos tradicionales de medición con vuelos de drones que generan nubes de puntos y modelos digitales de elevación en horas, no semanas.</p>
+        <p class="servicio-p">Los informes comparativos entre levantamientos permiten verificar avances, controlar mermas y optimizar la logística de extracción.</p>
+        <ul class="servicio-bullets">
+          <li>Modelos Digitales de Elevación (MDE) de alta resolución</li>
+          <li>Nubes de puntos con precisión ±2 cm</li>
+          <li>Cálculo de diferencias de volumen entre fechas</li>
+          <li>Reportes de avance de extracción por periodo</li>
+          <li>Integración con sistemas de gestión minera</li>
+        </ul>
+      </div>
+      <div class="lidar-img">
+        <img src="./images/mineria.jpg" alt="Cálculo de volúmenes — CartoData" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 3. TOPOGRAFÍA ── -->
+  <section class="servicio-section" id="topografia">
+    <div class="servicio-inner">
+      <div>
+        <span class="servicio-num">03</span>
+        <p class="servicio-eyebrow">Topografía</p>
+        <h3 class="servicio-h3">Levantamiento topográfico <strong>de alta precisión</strong></h3>
+        <p class="servicio-p">Combinamos tecnologías de drones con fotogrametría y equipos GNSS de doble frecuencia para producir cartografía topográfica de alta fidelidad. Cubrimos extensiones de miles de hectáreas en tiempos que los métodos convencionales no pueden igualar.</p>
+        <p class="servicio-p">El resultado son curvas de nivel, perfiles, secciones transversales y ortofotos georreferenciadas utilizables directamente en software de diseño e ingeniería de minas.</p>
+        <ul class="servicio-bullets">
+          <li>Ortofotomosaicos de hasta 2 cm/px de resolución</li>
+          <li>Curvas de nivel con equidistancia configurable</li>
+          <li>Perfiles longitudinales y secciones transversales</li>
+          <li>Puntos de control (GCPs) con GPS geodésico</li>
+          <li>Entrega en formatos DWG, SHP, GeoTIFF y LAS</li>
+        </ul>
+      </div>
+      <div class="img-placeholder">
+        <div class="img-placeholder-icon">📐</div>
+        <span class="img-placeholder-label">Topografía</span>
+        <span class="img-placeholder-hint">Ortofoto o modelo de curvas de nivel de zona minera</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 4. LiDAR ── -->
+  <section class="servicio-section" id="lidar">
+    <div class="servicio-inner reverse">
+      <div>
+        <span class="servicio-num">04</span>
+        <p class="servicio-eyebrow">LiDAR</p>
+        <h3 class="servicio-h3">Escaneo láser para <strong>terrenos complejos</strong></h3>
+        <p class="servicio-p">El sensor LiDAR aerotransportado penetra la vegetación y genera modelos de terreno desnudo con precisión milimétrica, incluso en zonas con cubierta vegetal densa o de difícil acceso. Es la herramienta definitiva para proyectos donde la topografía convencional es insuficiente.</p>
+        <p class="servicio-p">Las nubes de puntos LiDAR se procesan para generar modelos de superficie (DSM), modelos de terreno (DTM) y análisis de pendientes críticas para la seguridad operacional.</p>
+        <ul class="servicio-bullets">
+          <li>Densidades de hasta 100+ puntos/m²</li>
+          <li>Separación de retornos: vegetación, edificaciones, terreno</li>
+          <li>Modelos DTM en zonas con vegetación densa</li>
+          <li>Análisis de pendientes y zonas de inestabilidad</li>
+          <li>Detección de infraestructura subterránea y vías</li>
+        </ul>
+      </div>
+      <div class="lidar-img">
+        <img src="./images/lidar-hero.jpg" alt="LiDAR — CartoData" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 5. REPORTES ── -->
+  <section class="servicio-section" id="reportes">
+    <div class="servicio-inner">
+      <div>
+        <span class="servicio-num">05</span>
+        <p class="servicio-eyebrow">Reportes</p>
+        <h3 class="servicio-h3">Informes técnicos listos <strong>para decisión y cumplimiento</strong></h3>
+        <p class="servicio-p">Todos los datos capturados se consolidan en reportes técnicos estructurados para diferentes audiencias: dirección de operaciones, área ambiental, legal y autoridades regulatorias. Cada reporte incluye cartografía, tablas de datos, análisis de tendencias y conclusiones accionables.</p>
+        <p class="servicio-p">El ciclo de entrega puede configurarse mensualmente, trimestralmente o en función de hitos operacionales clave.</p>
+        <ul class="servicio-bullets">
+          <li>Reporte ejecutivo de avance de extracción</li>
+          <li>Informe de cumplimiento ambiental periódico</li>
+          <li>Dashboard geoespacial interactivo en línea</li>
+          <li>Fichas técnicas de levantamiento para archivo legal</li>
+          <li>Exportación a formatos regulatorios MIA / INE</li>
+        </ul>
+      </div>
+      <div class="img-placeholder">
+        <div class="img-placeholder-icon">📊</div>
+        <span class="img-placeholder-label">Reportes</span>
+        <span class="img-placeholder-hint">Dashboard / pantalla de reporte o portada de informe técnico minero</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="cta-section" id="cta">
+    <div class="cta-inner">
+      <h2>¿Tienes un proyecto minero que requiere precisión geoespacial?</h2>
+      <p>Cuéntanos el desafío. Nuestros expertos en minería y geomática te proponen la solución en menos de 24 horas.</p>
+      <a href="https://api.whatsapp.com/send?phone=523318520000" target="_blank" rel="noopener" class="btn-white">Conecta con nuestros expertos →</a>
+    </div>
+  </section>
+
+</body>
+</html>
