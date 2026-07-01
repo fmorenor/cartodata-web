@@ -2061,6 +2061,22 @@
   </script>
 
   <script>
+  /* Parcha href #minas → ./mineria.html en el dropdown de Impacto */
+  (function patchMineriaHref() {
+    function patch() {
+      const el = document.querySelector('a[href="#minas"]');
+      if (!el) return;
+      el.setAttribute('href', './mineria.html');
+    }
+    const obs = new MutationObserver(patch);
+    obs.observe(document.body, { childList: true, subtree: true });
+    setTimeout(patch, 500);
+    setTimeout(patch, 2000);
+    setTimeout(patch, 4000);
+  })();
+  </script>
+
+  <script>
   /* Reordena el dropdown de Tecnología: Procesos → Cartográfica → GeoSoftware */
   (function reorderTechMenu() {
     const HREFS = [
