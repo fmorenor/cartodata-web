@@ -1256,6 +1256,31 @@
     setTimeout(hook, 4000);
   })();
 
+  /* ── Redirigir tarjeta Instituciones a instituciones.html ── */
+  (function hookInstitucionesNav() {
+    function hook() {
+      document.querySelectorAll('a, button').forEach(el => {
+        if (el.dataset.cdInstHooked) return;
+        const h3 = el.querySelector('h3');
+        const match = h3 && h3.textContent.trim() === 'Instituciones';
+        const directMatch = el.textContent.trim() === 'Instituciones';
+        if (match || directMatch) {
+          el.dataset.cdInstHooked = '1';
+          el.addEventListener('click', e => {
+            e.preventDefault();
+            e.stopPropagation();
+            window.location.assign('./instituciones.html');
+          }, true);
+        }
+      });
+    }
+    const obs = new MutationObserver(hook);
+    obs.observe(document.body, { childList: true, subtree: true });
+    setTimeout(hook, 500);
+    setTimeout(hook, 2000);
+    setTimeout(hook, 4000);
+  })();
+
   /* ── Redirigir tarjeta Infraestructura a infraestructura.html ── */
   (function hookInfraestructuraNav() {
     function hook() {

@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instituciones · Modernización catastral y registral — CartoData</title>
+  <meta name="description" content="Trámites en línea, ventanilla única, georreferenciación de apoyos y verificación en campo. Soluciones geoespaciales para instituciones y gobiernos." />
+  <link rel="canonical" href="https://www.cartodata.com/instituciones.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.cartodata.com/instituciones.html" />
+  <meta property="og:title" content="Instituciones — CartoData" />
+  <meta property="og:description" content="Modernización catastral y registral. Certeza sobre la tenencia de la tierra." />
+  <meta property="og:locale" content="es_MX" />
+  <meta property="og:site_name" content="CartoData" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <script src="./shared.js" defer></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body { background: #050816; color: #f8fafc; font-family: 'DM Sans', system-ui, sans-serif; }
+    img { display: block; max-width: 100%; }
+
+    /* ── HERO VIDEO ── */
+    .hero {
+      position: relative; width: 100%; min-height: 100vh;
+      display: flex; align-items: center; overflow: hidden;
+    }
+    .hero-video {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to top,  rgba(5,8,22,0.95) 0%, rgba(5,8,22,0.45) 40%, rgba(5,8,22,0.20) 100%),
+        linear-gradient(to right, rgba(5,8,22,0.80) 0%, rgba(5,8,22,0.30) 60%, rgba(5,8,22,0.0) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 860px;
+      padding: clamp(7rem,14vw,11rem) clamp(1.5rem,6vw,4rem) clamp(5rem,9vw,7rem);
+    }
+    .hero-eyebrow {
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 1.2rem;
+    }
+    .hero-h1 {
+      font-size: clamp(2.4rem,5.5vw,4.5rem); font-weight: 200; line-height: 1.1;
+      color: #fff; margin-bottom: 0.6rem;
+    }
+    .hero-h1 strong { font-weight: 800; display: block; }
+    .hero-sub {
+      font-size: clamp(1rem,1.6vw,1.15rem); font-weight: 300; line-height: 1.7;
+      color: rgba(255,255,255,0.65); max-width: 560px; margin: 1.2rem 0 2.5rem;
+    }
+    .hero-pills { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2.5rem; }
+    .hero-pill {
+      padding: 0.4rem 1rem; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.2);
+      font-size: 0.8rem; color: rgba(255,255,255,0.75); font-weight: 500;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-block; padding: 1rem 2.4rem;
+      background: #3b5bdb; color: #fff; border-radius: 999px;
+      font-size: 0.95rem; font-weight: 600; text-decoration: none;
+      transition: background 250ms, transform 200ms;
+    }
+    .btn-primary:hover { background: #2d4bbd; transform: translateY(-2px); }
+    .btn-ghost {
+      display: inline-block; padding: 1rem 2.4rem;
+      background: transparent; color: #fff; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.3);
+      font-size: 0.95rem; font-weight: 500; text-decoration: none;
+      transition: background 250ms, border-color 250ms;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.6); }
+
+    /* ── CASO DE ÉXITO: LOS CABOS ── */
+    .caso-section {
+      background: #0b1022;
+      padding: clamp(4rem,8vw,7rem) clamp(1.5rem,6vw,4rem);
+    }
+    .caso-inner { max-width: 1200px; margin: 0 auto; }
+    .caso-eyebrow {
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.16em;
+      text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 0.8rem;
+    }
+    .caso-h2 {
+      font-size: clamp(1.6rem,3vw,2.4rem); font-weight: 300; color: #fff;
+      margin-bottom: 3rem; line-height: 1.2;
+    }
+    .caso-h2 strong { font-weight: 800; }
+    .caso-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+    }
+    .caso-video-wrap {
+      border-radius: 16px; overflow: hidden; aspect-ratio: 16/9;
+      background: #050816;
+    }
+    .caso-video-wrap iframe { width: 100%; height: 100%; border: none; }
+    .caso-logo {
+      width: 140px; margin-bottom: 1.5rem;
+      filter: brightness(0) invert(1); opacity: 0.85;
+    }
+    .caso-text {
+      font-size: 0.97rem; line-height: 1.75; color: rgba(255,255,255,0.65);
+      margin-bottom: 1rem;
+    }
+    .caso-text .inicial {
+      float: left; font-size: 3rem; font-weight: 900; line-height: 0.8;
+      color: #3b5bdb; margin-right: 0.2rem; margin-top: 0.1rem;
+    }
+    .caso-note {
+      font-size: 0.78rem; color: rgba(255,255,255,0.3); margin-top: 1rem; font-style: italic;
+    }
+
+    /* ── MÉTRICAS ── */
+    .metricas-section {
+      background: #050816;
+      padding: clamp(4rem,8vw,7rem) clamp(1.5rem,6vw,4rem);
+    }
+    .metricas-inner { max-width: 1200px; margin: 0 auto; }
+    .metricas-eyebrow {
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.16em;
+      text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 0.8rem;
+    }
+    .metricas-h2 {
+      font-size: clamp(1.6rem,3vw,2.4rem); font-weight: 300; color: #fff;
+      margin-bottom: 3rem; line-height: 1.2;
+    }
+    .metricas-h2 strong { font-weight: 800; }
+    .metricas-list { display: flex; flex-direction: column; gap: 1.8rem; }
+    .metrica-item {}
+    .metrica-label {
+      font-size: 0.88rem; color: rgba(255,255,255,0.55); margin-bottom: 0.5rem;
+      display: flex; justify-content: space-between; align-items: baseline;
+    }
+    .metrica-pct {
+      font-size: 1.1rem; font-weight: 700; color: #fff;
+    }
+    .metrica-bar-track {
+      height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden;
+    }
+    .metrica-bar-fill {
+      height: 100%; border-radius: 3px; background: #3b5bdb;
+      width: 0; transition: width 1.2s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .metrica-bar-fill.zero { background: rgba(255,255,255,0.15); }
+    .metricas-note {
+      font-size: 0.78rem; color: rgba(255,255,255,0.3); margin-top: 2rem; font-style: italic;
+    }
+
+    /* ── CONSTELACIÓN DE SISTEMAS ── */
+    .constelacion-section {
+      background: #f4f4f2;
+      padding: clamp(4rem,8vw,7rem) clamp(1.5rem,6vw,4rem);
+    }
+    .constelacion-inner { max-width: 1200px; margin: 0 auto; }
+    .constelacion-eyebrow {
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.16em;
+      text-transform: uppercase; color: #3b5bdb; margin-bottom: 0.7rem;
+    }
+    .constelacion-disc {
+      font-size: 0.88rem; color: #6b7280; margin-bottom: 0.3rem;
+    }
+    .constelacion-h2 {
+      font-size: clamp(1.8rem,3.5vw,2.8rem); font-weight: 300; color: #0f172a;
+      margin-bottom: 0.8rem; line-height: 1.2;
+    }
+    .constelacion-h2 strong { font-weight: 800; }
+    .constelacion-lead {
+      font-size: 0.97rem; color: #475569; line-height: 1.75;
+      max-width: 700px; margin-bottom: 3.5rem;
+    }
+
+    /* ── GRUPOS DE SISTEMAS ── */
+    .sistemas-grupo { margin-bottom: 4rem; }
+    .sistemas-grupo-title {
+      font-size: 1rem; font-weight: 700; color: #0f172a;
+      margin-bottom: 1.5rem; padding-bottom: 0.7rem;
+      border-bottom: 2px solid #e2e8f0;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .sistemas-grupo-title span.tag {
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: #3b5bdb;
+      background: #e8edff; border-radius: 999px; padding: 0.2rem 0.7rem;
+    }
+    .sistemas-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 1.2rem;
+    }
+    .sistema-card {
+      background: #fff; border-radius: 14px;
+      border: 1px solid #e2e8f0; padding: 1.4rem 1.5rem;
+      display: flex; gap: 1rem; align-items: flex-start;
+      transition: box-shadow 200ms, border-color 200ms;
+    }
+    .sistema-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); border-color: #c7d2fe; }
+    .sistema-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      background: #eef2ff; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+    .sistema-body h4 {
+      font-size: 0.9rem; font-weight: 700; color: #0f172a; margin-bottom: 0.3rem;
+    }
+    .sistema-body p {
+      font-size: 0.82rem; color: #475569; line-height: 1.55;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: #3b5bdb;
+      padding: clamp(4rem,8vw,6rem) clamp(1.5rem,6vw,4rem);
+      text-align: center;
+    }
+    .cta-inner { max-width: 700px; margin: 0 auto; }
+    .cta-inner h2 {
+      font-size: clamp(1.6rem,3vw,2.4rem); font-weight: 700; color: #fff;
+      margin-bottom: 1rem; line-height: 1.2;
+    }
+    .cta-inner p {
+      font-size: 1rem; color: rgba(255,255,255,0.78); margin-bottom: 2.2rem; line-height: 1.65;
+    }
+    .btn-white {
+      display: inline-block; padding: 1rem 2.8rem;
+      background: #fff; color: #3b5bdb; border-radius: 999px;
+      font-size: 0.95rem; font-weight: 700; text-decoration: none;
+      transition: background 200ms, transform 200ms;
+    }
+    .btn-white:hover { background: #f0f4ff; transform: translateY(-2px); }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:900px) {
+      .caso-grid { grid-template-columns: 1fr; gap: 3rem; }
+    }
+    @media(max-width:600px) {
+      .hero-pills { display: none; }
+      .hero-btns { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── HERO con VIDEO ── -->
+  <section class="hero" id="top">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto"
+           poster="./images/herr-procesos.jpg">
+      <source src="./images/instituciones-video.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Instituciones · Gobierno</p>
+      <h1 class="hero-h1">Modernización catastral<strong>y registral</strong></h1>
+      <p class="hero-sub">Certeza sobre la tenencia de la tierra. Más recaudación sin subir impuestos, menos tiempo en trámites y sistemas interoperables entre Catastro y Registro Público.</p>
+      <div class="hero-pills">
+        <span class="hero-pill">Trámites en línea</span>
+        <span class="hero-pill">Ventanilla única</span>
+        <span class="hero-pill">Implementación de programas</span>
+        <span class="hero-pill">Georreferenciación de apoyos</span>
+        <span class="hero-pill">Verificación en campo</span>
+      </div>
+      <div class="hero-btns">
+        <a href="#cta" class="btn-primary">Conecta con nuestros expertos →</a>
+        <a href="#caso" class="btn-ghost">Ver caso de éxito</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CASO DE ÉXITO: LOS CABOS ── -->
+  <section class="caso-section" id="caso">
+    <div class="caso-inner">
+      <p class="caso-eyebrow">Caso de éxito</p>
+      <h2 class="caso-h2">Los Cabos, BCS — <strong>Armonización catastral y registral</strong></h2>
+      <div class="caso-grid">
+        <div class="caso-video-wrap">
+          <iframe src="https://www.youtube.com/embed/i8vSoZroHcY?rel=0&modestbranding=1"
+                  loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
+                  title="CartoData - Caso de éxito Los Cabos - Armonización Catastral & Registral"></iframe>
+        </div>
+        <div>
+          <img src="./images/mi-casa-es-mi-casa-logo.png" alt="Mi Casa es Mi Casa" class="caso-logo" onerror="this.style.display='none'">
+          <p class="caso-text">
+            <span class="inicial">E</span>l paso de Odile transformó el municipio de Los Cabos, desencadenando el planteamiento de un proyecto de modernización catastral con el cual el municipio blinda su operación a futuro y se integra a la directriz de armonización definida por la Secretaría de Desarrollo Agrario Territorial y Urbano (SEDATU) entre Registros Públicos y Catastros.
+          </p>
+          <p class="caso-text">
+            El objetivo: dar certeza a la tenencia de la tierra, en Los Cabos <strong>#MiCasaEsMiCasa</strong>
+          </p>
+          <p class="caso-note">*Resultados medidos de la implementación de armonización en el municipio de Los Cabos, BCS, 2015</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── MÉTRICAS ── -->
+  <section class="metricas-section" id="metricas">
+    <div class="metricas-inner">
+      <p class="metricas-eyebrow">Beneficios tangibles</p>
+      <h2 class="metricas-h2">Resultados de la <strong>modernización catastral</strong></h2>
+      <div class="metricas-list">
+        <div class="metrica-item" data-pct="116">
+          <div class="metrica-label">
+            <span>Incremento en m² de construcción registrados en el padrón</span>
+            <span class="metrica-pct">116%</span>
+          </div>
+          <div class="metrica-bar-track"><div class="metrica-bar-fill" style="width:0%"></div></div>
+        </div>
+        <div class="metrica-item" data-pct="0">
+          <div class="metrica-label">
+            <span>Incremento en tasas de impuestos</span>
+            <span class="metrica-pct">0%</span>
+          </div>
+          <div class="metrica-bar-track"><div class="metrica-bar-fill zero" style="width:3%"></div></div>
+        </div>
+        <div class="metrica-item" data-pct="52.6">
+          <div class="metrica-label">
+            <span>Incremento en la recaudación en 2 años</span>
+            <span class="metrica-pct">52.6%</span>
+          </div>
+          <div class="metrica-bar-track"><div class="metrica-bar-fill" style="width:0%"></div></div>
+        </div>
+        <div class="metrica-item" data-pct="42.7">
+          <div class="metrica-label">
+            <span>Reducción de tiempos de trámites</span>
+            <span class="metrica-pct">42.7%</span>
+          </div>
+          <div class="metrica-bar-track"><div class="metrica-bar-fill" style="width:0%"></div></div>
+        </div>
+        <div class="metrica-item" data-pct="33">
+          <div class="metrica-label">
+            <span>Cuentas vinculadas entre Registro Público y Catastro en 9 meses</span>
+            <span class="metrica-pct">33%</span>
+          </div>
+          <div class="metrica-bar-track"><div class="metrica-bar-fill" style="width:0%"></div></div>
+        </div>
+      </div>
+      <p class="metricas-note">Para la mejora de procesos y captación de impuestos se llevó a cabo una optimización y armonización entre Catastro y Registro Público de la Propiedad. Los Cabos, BCS 2015.</p>
+    </div>
+  </section>
+
+  <!-- ── CONSTELACIÓN DE SISTEMAS ── -->
+  <section class="constelacion-section" id="sistemas">
+    <div class="constelacion-inner">
+      <p class="constelacion-eyebrow">Para una operación segura</p>
+      <h2 class="constelacion-h2">Una constelación<br><strong>de sistemas</strong></h2>
+      <p class="constelacion-lead">En CartoData desarrollamos soluciones que blindan, eficientizan y facilitan la operación de catastros, registros públicos y tesorerías municipales.</p>
+
+      <!-- Información & Tecnologías -->
+      <div class="sistemas-grupo">
+        <h3 class="sistemas-grupo-title">Información &amp; Tecnologías <span class="tag">Omnidata</span></h3>
+        <div class="sistemas-grid">
+          <div class="sistema-card">
+            <div class="sistema-icon">🗄️</div>
+            <div class="sistema-body">
+              <h4>GDB</h4>
+              <p>Base de Datos Geográficos centralizada permitiendo mantener consistencia en los datos.</p>
+            </div>
+          </div>
+          <div class="sistema-card">
+            <div class="sistema-icon">📷</div>
+            <div class="sistema-body">
+              <h4>Oblix</h4>
+              <p>Fotografías oblicuas integradas a la base cartográfica: 4 perspectivas a 45°.</p>
+            </div>
+          </div>
+          <div class="sistema-card">
+            <div class="sistema-icon">🌐</div>
+            <div class="sistema-body">
+              <h4>Visión 360</h4>
+              <p>Visión360® recorrió 1,125 km de calles y avenidas de las zonas urbanas del municipio.</p>
+            </div>
+          </div>
+          <div class="sistema-card">
+            <div class="sistema-icon">📄</div>
+            <div class="sistema-body">
+              <h4>Documentos Digitales</h4>
+              <p>Se digitalizaron más de 1.5 millones de imágenes de formatos duros para acceso con el sistema eSellos.</p>
+            </div>
+          </div>
+          <div class="sistema-card">
+            <div class="sistema-icon">🗺️</div>
+            <div class="sistema-body">
+              <h4>QGIS</h4>
+              <p>Para las ediciones de la cartografía, el municipio adoptó la plataforma open source QGIS.</p>
+            </div>
+          </div>
+          <div class="sistema-card">
+            <div class="sistema-icon">🔌</div>
+            <div class="sistema-body">
+              <h4>Web Services</h4>
+              <p>Sistemas existentes y viejos pueden interactuar con la plataforma mediante webservices y API.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sistemas de control -->
+      <div class="sistemas-grupo">
+        <h3 class="sistemas-grupo-title">Sistemas de control y generación de información <span class="tag">Gestión</span></h3>
+        <div class="sistemas-grid">
+          <div class="sistema-card">
+            <div class="sistema-icon">🔏</div>
+            <div class="sistema-body">
+              <h4>eSellos</h4>
+              <p>Visor de documentos escaneados con capacidad de asignar sellos virtuales con detalles de actos jurídicos.</p>
+            </div>
+          </div>
+          <div class="sistema-card">
+            <div class="sistema-icon">⚙️</div>
+            <div class="sistema-body">
+              <h4>eTrámites</h4>
+              <p>Modela flujos de trabajo e interacciones entre sistemas controlando carga, responsables y tiempos de respuesta.</p>
+            </div>
+          </div>
+          <div class="sistema-card">
+            <div class="sistema-icon">🔢</div>
+            <div class="sistema-body">
+              <h4>eNúmeros</h4>
+              <p>Sistema multiusuarios para asignación de números oficiales con algoritmos que garantizan no repetirlos.</p>
+            </div>
+          </div>
+          <div class="sistema-card">
+            <div class="sistema-icon">📁</div>
+            <div class="sistema-body">
+              <h4>eDocumentos</h4>
+              <p>Herramientas de indexación para subir documentos secuenciales de forma masiva o individual.</p>
+            </div>
+          </div>
+          <div class="sistema-card">
+            <div class="sistema-icon">📐</div>
+            <div class="sistema-body">
+              <h4>ePlanos</h4>
+              <p>La cartografía es el origen de medidas y colindancias de predios. Valida georreferencia y geometrías.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sistemas de gestión -->
+      <div class="sistemas-grupo">
+        <h3 class="sistemas-grupo-title">Sistemas de gestión <span class="tag">GeoSoftware</span></h3>
+        <div class="sistemas-grid">
+          <div class="sistema-card">
+            <div class="sistema-icon">🏘️</div>
+            <div class="sistema-body">
+              <h4>eCatastro</h4>
+              <p>Incrementa la eficiencia con movimientos masivos, actualización de valores desde la cartografía y vista integral de bienes inmuebles.</p>
+            </div>
+          </div>
+          <div class="sistema-card">
+            <div class="sistema-icon">📋</div>
+            <div class="sistema-body">
+              <h4>eCédula</h4>
+              <p>Vista actual de todos los registros existentes del predio provenientes de diferentes bases de datos.</p>
+            </div>
+          </div>
+          <div class="sistema-card">
+            <div class="sistema-icon">📑</div>
+            <div class="sistema-body">
+              <h4>eRegistro</h4>
+              <p>Crea folios reales electrónicos. Identifica cada acto jurídico y genera un folio real vinculado con catastro y cartografía.</p>
+            </div>
+          </div>
+          <div class="sistema-card">
+            <div class="sistema-icon">🗺️</div>
+            <div class="sistema-body">
+              <h4>eCartoG</h4>
+              <p>Plataforma en línea de visualización de mapas municipales para difusión en computadoras y dispositivos móviles.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="cta-section" id="cta">
+    <div class="cta-inner">
+      <h2>¿Necesitas dar certeza a la tenencia de la tierra y mejorar los ingresos sin subir tasas?</h2>
+      <p>Platica con nuestros expertos en modernización catastral y registral.</p>
+      <a href="https://api.whatsapp.com/send?phone=523318520000" target="_blank" rel="noopener" class="btn-white">Conecta con nuestros expertos →</a>
+    </div>
+  </section>
+
+  <script>
+    // Animación de barras al hacer scroll
+    (function() {
+      const items = document.querySelectorAll('.metrica-item[data-pct]');
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const pct = parseFloat(entry.target.dataset.pct);
+            const fill = entry.target.querySelector('.metrica-bar-fill');
+            if (fill && !fill.classList.contains('zero')) {
+              setTimeout(() => { fill.style.width = Math.min(pct, 100) + '%'; }, 100);
+            }
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.3 });
+      items.forEach(el => obs.observe(el));
+    })();
+  </script>
+
+</body>
+</html>
