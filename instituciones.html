@@ -241,6 +241,13 @@
       font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.55;
     }
 
+    /* ── DIVISOR IMAGEN FULL WIDTH ── */
+    .img-divisor {
+      width: 100vw; position: relative; left: 50%; transform: translateX(-50%);
+      height: 340px; overflow: hidden; margin: 2.5rem 0;
+    }
+    .img-divisor img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+
     /* ── CTA ── */
     .cta-section {
       background: #3b5bdb;
@@ -383,48 +390,53 @@
         <h3 class="sistemas-grupo-title">Información &amp; Tecnologías <span class="tag">Omnidata</span></h3>
         <div class="sistemas-grid">
           <div class="sistema-card">
-            <div class="sistema-icon">🗄️</div>
+            <div class="sistema-icon"><img src="./images/icons/gdb_i.png" alt="GDB" style="width:24px;height:24px;object-fit:contain;" /></div>
             <div class="sistema-body">
               <h4>GDB</h4>
               <p>Base de Datos Geográficos centralizada permitiendo mantener consistencia en los datos.</p>
             </div>
           </div>
           <div class="sistema-card">
-            <div class="sistema-icon">📷</div>
+            <div class="sistema-icon"><img src="./images/icons/oblix_i.png" alt="Oblix" style="width:24px;height:24px;object-fit:contain;" /></div>
             <div class="sistema-body">
               <h4>Oblix</h4>
               <p>Fotografías oblicuas integradas a la base cartográfica: 4 perspectivas a 45°.</p>
             </div>
           </div>
           <div class="sistema-card">
-            <div class="sistema-icon">🌐</div>
+            <div class="sistema-icon"><img src="./images/icons/v360.png" alt="Visión 360" style="width:24px;height:24px;object-fit:contain;" /></div>
             <div class="sistema-body">
               <h4>Visión 360</h4>
               <p>Visión360® recorrió 1,125 km de calles y avenidas de las zonas urbanas del municipio.</p>
             </div>
           </div>
           <div class="sistema-card">
-            <div class="sistema-icon">📄</div>
+            <div class="sistema-icon"><img src="./images/icons/documentos_digitales_i.png" alt="Documentos Digitales" style="width:24px;height:24px;object-fit:contain;" /></div>
             <div class="sistema-body">
               <h4>Documentos Digitales</h4>
               <p>Se digitalizaron más de 1.5 millones de imágenes de formatos duros para acceso con el sistema eSellos.</p>
             </div>
           </div>
           <div class="sistema-card">
-            <div class="sistema-icon">🗺️</div>
+            <div class="sistema-icon"><img src="./images/icons/qGIS_i.png" alt="QGIS" style="width:24px;height:24px;object-fit:contain;" /></div>
             <div class="sistema-body">
               <h4>QGIS</h4>
               <p>Para las ediciones de la cartografía, el municipio adoptó la plataforma open source QGIS.</p>
             </div>
           </div>
           <div class="sistema-card">
-            <div class="sistema-icon">🔌</div>
+            <div class="sistema-icon"><img src="./images/icons/web_services_i.png" alt="Web Services" style="width:24px;height:24px;object-fit:contain;" /></div>
             <div class="sistema-body">
               <h4>Web Services</h4>
               <p>Sistemas existentes y viejos pueden interactuar con la plataforma mediante webservices y API.</p>
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- Divisor imagen antes de Sistemas de control -->
+      <div class="img-divisor">
+        <img src="./images/CartoData_Los_Cabos_fotografia_aerea_fotografia_oblicua_oblix_documentos_digitales_vision360 (3).jpg" alt="CartoData Los Cabos — sistemas" loading="lazy" />
       </div>
 
       <!-- Sistemas de control -->
@@ -469,33 +481,46 @@
         </div>
       </div>
 
+      <!-- Divisor imagen 1 -->
+      <div class="img-divisor">
+        <img src="./images/CartoData_Los_Cabos_eCarto_eCedula.jpg" alt="eCatastro Los Cabos — CartoData" loading="lazy" />
+      </div>
+
       <!-- Sistemas de gestión -->
       <div class="sistemas-grupo">
         <h3 class="sistemas-grupo-title">Sistemas de gestión <span class="tag">GeoSoftware</span></h3>
         <div class="sistemas-grid">
           <div class="sistema-card">
-            <div class="sistema-icon">🏘️</div>
+            <div class="sistema-icon">
+              <img src="./images/icons/ecatastro_i.png" alt="eCatastro" style="width:24px;height:24px;object-fit:contain;" />
+            </div>
             <div class="sistema-body">
               <h4>eCatastro</h4>
               <p>Incrementa la eficiencia con movimientos masivos, actualización de valores desde la cartografía y vista integral de bienes inmuebles.</p>
             </div>
           </div>
           <div class="sistema-card">
-            <div class="sistema-icon">📋</div>
+            <div class="sistema-icon">
+              <img src="./images/icons/ecedula_i.png" alt="eCédula" style="width:24px;height:24px;object-fit:contain;" />
+            </div>
             <div class="sistema-body">
               <h4>eCédula</h4>
               <p>Vista actual de todos los registros existentes del predio provenientes de diferentes bases de datos.</p>
             </div>
           </div>
           <div class="sistema-card">
-            <div class="sistema-icon">📑</div>
+            <div class="sistema-icon">
+              <img src="./images/icons/eregistro_i.png" alt="eRegistro" style="width:24px;height:24px;object-fit:contain;" />
+            </div>
             <div class="sistema-body">
               <h4>eRegistro</h4>
               <p>Crea folios reales electrónicos. Identifica cada acto jurídico y genera un folio real vinculado con catastro y cartografía.</p>
             </div>
           </div>
           <div class="sistema-card">
-            <div class="sistema-icon">🗺️</div>
+            <div class="sistema-icon">
+              <img src="./images/icons/ecarto_i.png" alt="eCartoG" style="width:24px;height:24px;object-fit:contain;" />
+            </div>
             <div class="sistema-body">
               <h4>eCartoG</h4>
               <p>Plataforma en línea de visualización de mapas municipales para difusión en computadoras y dispositivos móviles.</p>
@@ -503,6 +528,7 @@
           </div>
         </div>
       </div>
+
     </div>
   </section>
 
