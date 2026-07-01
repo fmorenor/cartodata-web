@@ -98,6 +98,11 @@
       font-size: 0.97rem; line-height: 1.8; color: rgba(255,255,255,0.62);
       margin-bottom: 1rem;
     }
+    .intro-video-wrap {
+      border-radius: 16px; overflow: hidden; aspect-ratio: 16/9;
+      background: #000; box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .intro-video-wrap iframe { width: 100%; height: 100%; border: none; display: block; }
     .intro-img-placeholder {
       background: rgba(255,255,255,0.04);
       border: 2px dashed rgba(255,255,255,0.12);
@@ -263,10 +268,12 @@
         <p class="intro-p">La industria minera enfrenta exigencias regulatorias crecientes, condiciones de terreno complejas y la necesidad de tomar decisiones con información precisa en tiempo real. CartoData integra tecnologías de captura avanzadas —drones, LiDAR y fotogrametría— con plataformas de análisis geoespacial para entregar datos accionables en cada etapa del proyecto.</p>
         <p class="intro-p">Desde la evaluación de impacto ambiental antes del inicio de operaciones, hasta los reportes de avance de extracción, nuestros procesos están diseñados para cumplir con los estándares más exigentes de la industria.</p>
       </div>
-      <div class="intro-img-placeholder">
-        <div class="img-placeholder-icon">🏔️</div>
-        <span class="img-placeholder-label">Imagen de panorama minero</span>
-        <span class="img-placeholder-hint">Fotografía aérea / drone de tajo abierto o zona de operaciones</span>
+      <div class="intro-video-wrap">
+        <iframe src="https://www.youtube.com/embed/ORBCfaajeLw?rel=0&modestbranding=1"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                allowfullscreen
+                title="Minería — CartoData"></iframe>
       </div>
     </div>
   </section>
